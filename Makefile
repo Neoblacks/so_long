@@ -1,0 +1,47 @@
+NAME = so_long.a
+
+PATH_LIBFT = libft
+LIBFT = $(PATH_LIBFT)/libft.a
+
+PATH_MLX = mlx
+MLX = $(PATH_MLX)/libmlx.a -I $(PATH_MLX) -L $(PATH_MLX) -lmlx -lXext -lX11 -lm
+
+PATH_SRCS = srcs
+
+SRCS = $(PATH_SRCS)/main.c
+
+OBJS = $(SRCS:.c=.o)
+
+CC = cc
+
+CFLAGS = -Wall -Wextra -Werror -g3
+
+RM = rm -f
+
+all: $(LIBFT) $(MLX) $(NAME)
+
+$(NAME): $(OBJS) $(MLX)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX)
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(PATH_MLX)/mlx.h
+
+$(LIBFT):
+	$(MAKE) -C $(PATH_LIBFT)
+
+$(MLX):
+	$(MAKE) -C $(PATH_MLX)
+
+clean:
+	$(MAKE) -C $(PATH_LIBFT) clean
+	$(MAKE) -C $(PATH_MLX) clean
+	$(RM) $(OBJS)
+
+fclean: clean
+	$(MAKE) -C $(PATH_LIBFT) fclean
+	$(MAKE) -C $(PATH_MLX) clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
