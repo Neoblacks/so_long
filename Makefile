@@ -24,7 +24,7 @@ $(NAME): $(OBJS) $(MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(PATH_MLX)/mlx.h
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(PATH_MLX)
 
 $(LIBFT):
 	$(MAKE) -C $(PATH_LIBFT)

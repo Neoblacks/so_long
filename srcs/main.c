@@ -41,10 +41,10 @@ int print_key(int keycode, t_vars *vars)
 	return (0);
 }
 
-int mouse_win(t_vars *vars, int x, int y)
+int mouse_win(int x, int y, t_vars *vars)
 {
 	(void)vars;
-	printf("x: %d, y: %u\n", x, y);
+	printf("x: %d, y: %d\n", x, y);
 	return (0);
 }
 
@@ -66,11 +66,11 @@ int	main(void)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 500, 500, "Hello world!");
 
+
 	mlx_hook(vars.win, 6, 1L<<6, mouse_win, &vars);
 	mlx_hook(vars.win, 2, 1L<<0, print_key, &vars);
 
 	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
-	mlx_hook(vars.win, 17, 1L<<17, close, &vars);
 
 	mlx_loop(vars.mlx);
 }
