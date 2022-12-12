@@ -10,19 +10,10 @@
 #include <string.h>
 #include <errno.h>
 
-
-
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
+	void	*img;
 }				t_vars;
 
 //Close window with ESC
@@ -31,6 +22,8 @@ int esc_close(int keycode, t_vars *vars)
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
+		// mlx_destroy_image(vars->mlx, img.img);
+		mlx_destroy_display(vars->mlx);
 		exit(0);
 	}
 	return (0);
@@ -40,7 +33,7 @@ int esc_close(int keycode, t_vars *vars)
 int cross_close(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
-	free(vars->mlx);
+	mlx_destroy_display(vars->mlx);
 	exit(0);
 }
 
@@ -58,28 +51,34 @@ int mouse_win(int x, int y, t_vars *vars)
 	return (0);
 }
 
+int	mouse_press(int button, int x, int y, t_vars *vars)
+{
+	(void)vars;
+	printf("button: %d, x: %d, y: %d\n", button, x, y);
+	return (0);
+}
+
 int	main(void)
 {
 	t_vars	vars;
 	int		win_width;
 	int		win_height;
+	// char	*relative_path;
+	// void 	*img;
 
 	win_width = 500;
 	win_height = 500;
 
 	vars.mlx = mlx_init();
 	mlx_get_screen_size(vars.mlx, &win_width, &win_height); //get screen size
-	vars.win = mlx_new_window(vars.mlx, win_width/2, win_height/2, "Hello world!"); //create window with name "Hello world!"
-
-	mlx_hook(vars.win, 2, 1L<<0, print_key, &vars); //key press (not work)
-	mlx_hook(vars.win, 17, 1L<<17, cross_close, &vars); //close window
-	mlx_hook(vars.win, 2, 1L<<0, esc_close, &vars); //close window with ESC
+	vars.win = mlx_new_window(vars.mlx, win_width, win_height, "Hello world!"); //create window with name "Hello world!"
 
 	char *line;
 	// char *line2;
 	int i = 0;
 	int j = 0;
 	int fd;
+
 
 	fd = open("map_1.ber", O_RDONLY);
 	line = get_next_line(fd);
@@ -112,11 +111,18 @@ int	main(void)
 			i++;
 		}
 		j++;
+		free(line);
 		line = get_next_line(fd);
 		i = 0;
 	}
+	free(line);
 	close(fd);
 
+
+	mlx_hook(vars.win, 5, 1L<<8, mouse_press, &vars); //mouse move
+	mlx_hook(vars.win, 2, 1L<<0, print_key, &vars); //key press
+	mlx_hook(vars.win, 17, 1L<<17, cross_close, &vars); //close window
+	mlx_key_hook(vars.win, esc_close, &vars); //close window with ESC
 
 
 	mlx_loop(vars.mlx);
