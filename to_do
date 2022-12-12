@@ -1,0 +1,13 @@
+dans le main :
+- Gestion d erreur si aucun arg ou trop
+- initaliser mlx
+- mettre le contenu dans la structure content (exit = E, Player = p etc)
+- ouvrir la map en fonction de l extension .ber
+            - si pas le cas = error
+- parse la map pour check si elle est good :
+    - check les lignes si elles sont fermes
+    - pareil pour les columns
+    - si y a 1 seul joueur
+    - si au moins une sortie
+    - si au moins un collectible
+
