@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:28:43 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/28 11:45:10 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:27:04 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
+#include "get_next_line.h"
 
 typedef struct s_list
 {
@@ -49,6 +50,7 @@ int		ft_memcmp(const void *pt1, const void *pt2, size_t size);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
+
 
 void	ft_bzero(void *s, size_t nb);
 void	*ft_memcpy(void *dest, const void *src, size_t n);

@@ -1,6 +1,15 @@
 #include "../mlx/mlx.h"
+#include "../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <errno.h>
+
 
 
 typedef struct	s_data {
@@ -16,15 +25,8 @@ typedef struct	s_vars {
 	void	*win;
 }				t_vars;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-int close(int keycode, t_vars *vars)
+//Close window with ESC
+int esc_close(int keycode, t_vars *vars)
 {
 	if (keycode == 65307)
 	{
@@ -32,6 +34,14 @@ int close(int keycode, t_vars *vars)
 		exit(0);
 	}
 	return (0);
+}
+
+//Close window with cross
+int cross_close(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	free(vars->mlx);
+	exit(0);
 }
 
 int print_key(int keycode, t_vars *vars)
@@ -50,27 +60,64 @@ int mouse_win(int x, int y, t_vars *vars)
 
 int	main(void)
 {
-	// void	*mlx;
-	// void	*mlx_win;
-	// int		width;
-	// int		height;
-	// t_data	img
-
-	// mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	// img.img = mlx_new_image(mlx, 1920, 1080);
-	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-	// 		&img.endian);
-
 	t_vars	vars;
+	int		win_width;
+	int		win_height;
+
+	win_width = 500;
+	win_height = 500;
 
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 500, 500, "Hello world!");
+	mlx_get_screen_size(vars.mlx, &win_width, &win_height); //get screen size
+	vars.win = mlx_new_window(vars.mlx, win_width/2, win_height/2, "Hello world!"); //create window with name "Hello world!"
+
+	mlx_hook(vars.win, 2, 1L<<0, print_key, &vars); //key press (not work)
+	mlx_hook(vars.win, 17, 1L<<17, cross_close, &vars); //close window
+	mlx_hook(vars.win, 2, 1L<<0, esc_close, &vars); //close window with ESC
+
+	char *line;
+	// char *line2;
+	int i = 0;
+	int j = 0;
+	int fd;
+
+	fd = open("map_1.ber", O_RDONLY);
+	line = get_next_line(fd);
+
+	while (line)
+	{
+		printf("%s", line);
+		while (line[i])
+		{
+			if (line[i] == '1') //wall
+			{
+				mlx_pixel_put(vars.mlx, vars.win, i * 20, j * 20, 0x00FF0000);
+			}
+			if (line[i] == '0') //empty
+			{
+				mlx_pixel_put(vars.mlx, vars.win, i * 20, j * 20, 0x0000FF00);
+			}
+			if (line[i] == 'E') //exit
+			{
+				mlx_pixel_put(vars.mlx, vars.win, i * 20, j * 20, 0x000000FF);
+			}
+			if (line[i] == 'C') //collectible
+			{
+				mlx_pixel_put(vars.mlx, vars.win, i * 20, j * 20, 0x00FFFF00);
+			}
+			if (line[i] == 'P') //player
+			{
+				mlx_pixel_put(vars.mlx, vars.win, i * 20, j * 20, 0x0000FFFF);
+			}
+			i++;
+		}
+		j++;
+		line = get_next_line(fd);
+		i = 0;
+	}
+	close(fd);
 
 
-	mlx_hook(vars.win, 6, 1L<<6, mouse_win, &vars);
-	mlx_hook(vars.win, 2, 1L<<0, print_key, &vars);
-
-	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
 
 	mlx_loop(vars.mlx);
 }

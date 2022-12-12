@@ -1,4 +1,4 @@
-NAME = so_long.a
+NAME = so_long
 
 PATH_LIBFT = libft
 LIBFT = $(PATH_LIBFT)/libft.a
@@ -24,7 +24,7 @@ $(NAME): $(OBJS) $(MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(PATH_MLX)
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(PATH_MLX) -I $(PATH_LIBFT)
 
 $(LIBFT):
 	$(MAKE) -C $(PATH_LIBFT)

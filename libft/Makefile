@@ -6,7 +6,7 @@
 #    By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 17:55:30 by amugnier          #+#    #+#              #
-#    Updated: 2022/12/04 15:24:38 by amugnier         ###   ########.fr        #
+#    Updated: 2022/12/12 12:36:16 by amugnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRCS = ft_atoi.c \
 	  ft_substr.c \
 	  ft_tolower.c \
 	  ft_toupper.c \
+	  get_next_line.c \
+	  get_next_line_utils.c \
 
 SRCS_BONUS = ft_lstadd_back.c \
 	  ft_lstadd_front.c \
