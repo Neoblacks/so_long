@@ -8,7 +8,8 @@ MLX = $(PATH_MLX)/libmlx.a -I $(PATH_MLX) -L $(PATH_MLX) -lmlx -lXext -lX11 -lm
 
 PATH_SRCS = srcs
 
-SRCS = $(PATH_SRCS)/main.c
+SRCS = $(PATH_SRCS)/main.c \
+		$(PATH_SRCS)/gestion_window.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -24,7 +25,7 @@ $(NAME): $(OBJS) $(MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(PATH_MLX) -I $(PATH_LIBFT)
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(PATH_MLX) -I $(PATH_LIBFT) -I $(PATH_SRCS)
 
 $(LIBFT):
 	$(MAKE) -C $(PATH_LIBFT)

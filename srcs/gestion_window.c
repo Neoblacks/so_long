@@ -6,9 +6,11 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:25:58 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/12 21:25:58 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/13 18:09:14 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/so_long.h"
 
 //Close window with ESC
 int esc_close(int keycode, t_vars *vars)
@@ -42,12 +44,5 @@ int mouse_win(int x, int y, t_vars *vars)
 {
 	(void)vars;
 	printf("x: %d, y: %d\n", x, y);
-	return (0);
-}
-
-int	mouse_press(int button, int x, int y, t_vars *vars)
-{
-	(void)vars;
-	printf("button: %d, x: %d, y: %d\n", button, x, y);
 	return (0);
 }
