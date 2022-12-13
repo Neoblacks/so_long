@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 14:03:24 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/13 21:26:52 by amugnier         ###   ########.fr       */
+/*   Created: 2022/12/13 21:32:59 by amugnier          #+#    #+#             */
+/*   Updated: 2022/12/13 21:40:40 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/so_long.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+void    ft_error(char *str)
 {
-	size_t	i;
-	size_t	j;
+    int i;
 
-	if (*little == '\0')
-		return ((char *)big);
-	i = 0;
-	if (len == 0)
-		return (NULL);
-	while (big[i] != '\0' && i < len)
-	{
-		j = 0;
-		while (little[j] == big[i + j] && i + j < len)
-		{
-			if (little[j + 1] == '\0')
-			{
-				return ((char *)big + i);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (NULL);
+    i = 0;
+    while (str[i] != '\0')
+    {
+        write(2, &str[i], 1);
+        i++;
+    }
 }

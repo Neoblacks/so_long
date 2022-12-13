@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/13 17:57:39 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/13 21:35:06 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,6 @@ int esc_close(int keycode, t_vars *vars);
 int cross_close(t_vars *vars);
 int print_key(int keycode, t_vars *vars);
 int mouse_win(int x, int y, t_vars *vars);
+int	ft_strstr(const char *str, char *comp);
+
+void	ft_error(char *str);
