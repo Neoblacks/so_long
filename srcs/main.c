@@ -6,16 +6,16 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/13 21:46:04 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:47:10 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	ft_strstr(const char *str, char *comp)
+int ft_strstr(const char *str, char *comp)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	j = 0;
@@ -34,40 +34,37 @@ int	ft_strstr(const char *str, char *comp)
 	return (EXIT_FAILURE);
 }
 
-int	main(int argc, char **argv)
+void	window_utils(t_data *data)
 {
-	t_vars	vars;
-	int		fd;
+	data->win = mlx_new_window(data->mlx, (data->width * data->image.img_width), \
+		(data->height * data->image.img_height), "So long");
+	if (data->win == NULL)
+	{
+		free(data->mlx);
+		return ;
+	}
+	mlx_hook(data->win, 2, 1L << 0, print_key, &data);
+	mlx_hook(data->win, 17, 1L << 17, cross_close, &data);
+	mlx_key_hook(data->win, esc_close, &data);
+	mlx_loop(data->mlx);
 
-	fd = 0;
-	(void)argv;
+}
+
+int main(int argc, char **argv)
+{
+	t_data data;
+
 	if (argc != 2)
 	{
 		ft_error("Error ! We need 1 argument .ber\n");
 		return (0);
 	}
-	else //init mlx, get size screen, divide by 2, get key pressed, cross close, esc close
+	else
 	{
-		if (ft_strstr(argv[1], ".ber") == EXIT_FAILURE)
-			ft_error("Error no correct format\n");
-		else
-		{
-			fd = open(argv[1], O_RDONLY);
-			if (fd < 0)
-				ft_error("File doesn't exist\n");
-			else
-			{
-				vars.mlx = mlx_init();
-				mlx_get_screen_size(vars.mlx, &vars.win_width,
-						&vars.win_height);
-				vars.win = mlx_new_window(vars.mlx, vars.win_width / 2,
-						vars.win_height / 2, "so_long");
-				mlx_hook(vars.win, 2, 1L << 0, print_key, &vars);
-				mlx_hook(vars.win, 17, 1L << 17, cross_close, &vars);
-				mlx_key_hook(vars.win, esc_close, &vars);
-				mlx_loop(vars.mlx);
-			}
-		}
+		data.count = 0;
+		data.mlx = mlx_init();
+		ft_content(&(data.content));
+		data.map = map(argv, &(data));
 	}
-	return (0);
+	return (1);
 }

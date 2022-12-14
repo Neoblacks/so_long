@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 21:32:59 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/14 11:37:31 by amugnier         ###   ########.fr       */
+/*   Created: 2022/12/14 12:15:22 by amugnier          #+#    #+#             */
+/*   Updated: 2022/12/14 16:45:22 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "map_gen.h"
 
-int ft_error(char *str)
+char	*build_empty(t_data *data)
 {
-	int i;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (str[i] != '\0')
+	j = 0;
+	data->map = malloc(sizeof(char) * (data->width * data->height
+				+ data->height + 1));
+	while (j < data->height)
 	{
-		write(2, &str[i], 1);
-		i++;
+		while (i < data->width)
+		{
+			data->map[i + j * (data->width + 1)] = '0';
+			i++;
+		}
+		data->map[i + j * (data->width + 1)] = '\n';
+		i = 0;
+		j++;
 	}
-	exit(1);
+	data->map[i + j * (data->width + 1)] = '\0';
+	return (data->map);
 }

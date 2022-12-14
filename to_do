@@ -1,9 +1,9 @@
 dans le main :
-- Gestion d erreur si aucun arg ou trop
-- initaliser mlx
+- Gestion d erreur si aucun arg ou trop (good)
+- initaliser mlx (good)
 - mettre le contenu dans la structure content (exit = E, Player = p etc)
 - ouvrir la map en fonction de l extension .ber
-            - si pas le cas = error
+            - si pas le cas = error (good)
 - parse la map pour check si elle est good :
     - check les lignes si elles sont fermes
     - pareil pour les columns

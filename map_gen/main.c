@@ -6,63 +6,55 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:00:29 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/13 18:03:30 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:46:11 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_gen.h"
 
 // need to make a main more long
-int main(void)
+int	main(void)
 {
-	int width;
-	int height;
-	int i;
-	int j;
-	char *map;
-	int count;
-	int fd;
-	int count_map;
+	t_data	data;
 
-	count_map = 10;
-	// while (count_map > 0)
-	// {
-		//name file with count_map
-		fd = open("../map/map.ber", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		srand(time(NULL));
-		width = rand() % 10 + 10;
-		height = rand() % 10 + 10;
-		map = make_wall_rectangle(width, height);
-		i = 0;
-		j = 0;
-		while (j < height)
+	data.count_map = 10;
+	data.fd = open("../map/map.ber", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	srand(time(NULL));
+	data.width = rand() % 10 + 10;
+	data.height = rand() % 10 + 10;
+	data.map = make_wall_rectangle(data.width, data.height);
+	data.i = 0;
+	data.j = 0;
+	while (data.j < data.height)
+	{
+		while (data.i < data.width)
 		{
-			while (i < width)
-			{
-				if (i == 0 || i == width - 1 || j == 0 || j == height - 1)
-					map[i + j * (width + 1)] = '1';
-				else
-					map[i + j * (width + 1)] = '0';
-				i++;
-			}
-			i = 0;
-			j++;
+			if (data.i == 0 || data.i == data.width - 1 || \
+				data.j == 0 || data.j == data.height - 1)
+			data.map[data.i + data.j * (data.width + 1)] = '1';
+			else
+				data.map[data.i + data.j * (data.width + 1)] = '0';
+			data.i++;
 		}
-		map = add_exit(map, width, height);
-		count = rand() % 4 + 4;
-		while (count > 0)
-		{
-			map = add_collectible(map, width, height);
-			count--;
-		}
-		count = rand() % (width * height / 4) + (width * height / 4);
-		while (count > 0)
-		{
-			map = add_wall(map, width, height);
-			count--;
-		}
-		map = add_player(map, width, height);
-		dprintf(fd, "%s", map);
-		free(map);
+		data.i = 0;
+		data.j++;
+	}
+	data.map = add_exit(data.map, data.width, data.height);
+	data.count = rand() % 4 + 4;
+	while (data.count > 0)
+	{
+		data.map = add_collectible(data.map, data.width, data.height);
+		data.count--;
+	}
+	data.count = rand() % (data.width * data.height / 4) + \
+		(data.width * data.height / 4);
+	while (data.count > 0)
+	{
+		data.map = add_wall(data.map, data.width, data.height);
+		data.count--;
+	}
+	data.map = add_player(data.map, data.width, data.height);
+	dprintf(data.fd, "%s", data.map);
+	free(data.map);
 	return (0);
 }
