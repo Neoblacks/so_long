@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:27:29 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/12 12:11:23 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:02:25 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		len2;
 	char	*str;
 
-	if (s1 && s2)
-	{
+	// if (s1 && s2)
+	// {
 		len1 = ft_strlen(s1);
 		len2 = ft_strlen(s2);
 		str = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
@@ -37,6 +37,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		}
 		str[len1] = '\0';
 		return (str);
-	}
-	return (NULL);
+	// }
+	// return (NULL);
 }

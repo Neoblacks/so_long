@@ -6,13 +6,13 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:15 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/14 19:53:39 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:49:47 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	ft_check_line(char *map_line, char wall, t_data *data) // check line
+int	ft_check_column(char *map_line, char wall, t_data *data) // check line
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int	ft_check_line(char *map_line, char wall, t_data *data) // check line
 	return (EXIT_SUCCESS);
 }
 
-int	ft_check_column(char *map_line, char wall, t_data *data) // check column
+int	ft_check_line(char *map_line, char wall) // check column
 {
 	int	i;
 
@@ -80,7 +80,7 @@ void	ft_check_content(t_data *data)
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == data->content.collectible)
-				;
+				data->content.count_collectible += 1;
 			data->content.count_collectible += 1;
 			if (data->map[i][j] == data->content.player)
 				data->content.count_player += 1;

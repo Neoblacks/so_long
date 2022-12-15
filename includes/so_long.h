@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/14 19:53:48 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:59:52 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct s_data
 	void	*win;
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	int		count;
@@ -82,6 +81,7 @@ typedef struct s_data
 	t_image	image;
 	t_vars	vars;
 	t_content content;
+	t_pos	pos;
 }	t_data;
 
 int	esc_close(int keycode, t_data *data);
@@ -101,7 +101,7 @@ int	ft_check_format(char **map);
 void	ft_check_content(t_data *data);
 int	ft_check_other(char *map_line, t_content *content);
 int	ft_check_column(char *map_line, char wall, t_data *data);
-int	ft_check_line(char *map_line, char wall, t_data *data);
-
+int	ft_check_line(char *map_line, char wall);
+char	*correct_strjoin(char *s1, char *s2);
 
 # endif

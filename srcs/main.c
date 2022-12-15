@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/14 19:47:10 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:48:27 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,6 @@ int ft_strstr(const char *str, char *comp)
 	return (EXIT_FAILURE);
 }
 
-void	window_utils(t_data *data)
-{
-	data->win = mlx_new_window(data->mlx, (data->width * data->image.img_width), \
-		(data->height * data->image.img_height), "So long");
-	if (data->win == NULL)
-	{
-		free(data->mlx);
-		return ;
-	}
-	mlx_hook(data->win, 2, 1L << 0, print_key, &data);
-	mlx_hook(data->win, 17, 1L << 17, cross_close, &data);
-	mlx_key_hook(data->win, esc_close, &data);
-	mlx_loop(data->mlx);
-
-}
 
 int main(int argc, char **argv)
 {

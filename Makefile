@@ -12,7 +12,9 @@ SRCS = $(PATH_SRCS)/main.c \
 		$(PATH_SRCS)/gestion_window.c \
 		$(PATH_SRCS)/gestion_map.c \
 		$(PATH_SRCS)/ft_error.c \
-		$(PATH_SRCS)/texture.c
+		$(PATH_SRCS)/texture.c \
+		$(PATH_SRCS)/check_map.c
+
 
 
 OBJS = $(SRCS:.c=.o)
