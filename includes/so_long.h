@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/15 17:59:52 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:23:24 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	ft_strstr(const char *str, char *comp);
 int	ft_error(char *str);
 char	**map(char **str, t_data *data);
 char	**ft_parse_map(int fd, t_data *data);
-char	*ft_get_map(int fd);
+char	**ft_get_map(int fd);
 void	*ft_clean_map(t_data *data);
 void	ft_texture(t_data *data);
 void	ft_content(t_content *content);
@@ -103,5 +103,11 @@ int	ft_check_other(char *map_line, t_content *content);
 int	ft_check_column(char *map_line, char wall, t_data *data);
 int	ft_check_line(char *map_line, char wall);
 char	*correct_strjoin(char *s1, char *s2);
+void	display_img(t_data *data, void *img, int x, int y);
+int	render_main(t_data *data);
+void	window_utils(t_data *data);
+void	render_other(t_data *data);
+void	render_bg(t_data *data);
+int	ft_stop(t_data *data);
 
 # endif

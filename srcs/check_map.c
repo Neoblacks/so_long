@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:15 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/15 17:49:47 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:27:55 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_check_column(char *map_line, char wall, t_data *data) // check line
 	int	i;
 
 	i = 0;
+	// write(1 ,map_line, 100);
 	while (map_line[i] != '\0')
 		i++;
 	if (map_line[0] != wall || map_line[i - 1] != wall)
@@ -34,11 +35,13 @@ int	ft_check_line(char *map_line, char wall) // check column
 
 	i = 0;
 	while (map_line[i] != '\0')
-		i++;
-	if (map_line[0] != wall)
 	{
-		ft_error("Error, Map line are not close\n");
-		exit(EXIT_FAILURE);
+		if (map_line[i] != wall)
+		{
+			ft_error("Error, Map line are not close\n");
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -50,15 +53,12 @@ int	ft_check_other(char *map_line, t_content *content)
 	i = 0;
 	while (map_line[i] != '\0')
 	{
-		if (content->count_exit || content->count_player > 1)
+		if (content->count_exit > 1 || content->count_player > 1)
 		{
 			ft_error("Error, Bad number of exit or player\n");
 			exit(EXIT_FAILURE);
 		}
-		if (map_line[i] != content->wall && \
-			map_line[i] != content->player && \
-			map_line[i] != content->exit && \
-			map_line[i] != content->collectible)
+		if (map_line[i] != content->wall && map_line[i] != content->player && map_line[i] != content->exit && map_line[i] != content->collectible && map_line[i] != '0')
 		{
 			ft_error("Error, Bad symbol in map");
 			exit(EXIT_FAILURE);
