@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/19 19:40:54 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/29 02:34:03 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	render_bg(t_data *data)
 	int	i;
 	int	j;
 
-	i = 0;
 	j = 0;
 	while (data->map[j] != NULL)
 	{
+		i = 0;
 		while (data->map[j][i] != '\0')
 		{
 			if (data->map[j][i] == data->content.wall)
@@ -29,8 +29,8 @@ void	render_bg(t_data *data)
 				display_img(data, data->image.img_floor, i, j);
 			i++;
 		}
-		i = 0;
 		j++;
+
 	}
 }
 
@@ -39,10 +39,11 @@ void	render_other(t_data *data)
 	int	i;
 	int	j;
 
-	i = 0;
 	j = 0;
-	while (data->map[j] != NULL)
+	// ft_putendl_fd(data->map[j], STDOUT_FILENO);
+	while (data->map[j])
 	{
+		i = 0;
 		while (data->map[j][i] != '\0')
 		{
 			if (data->map[j][i] == data->content.collectible)
@@ -57,15 +58,19 @@ void	render_other(t_data *data)
 				display_img(data, data->image.img_exit, i, j);
 			i++;
 		}
-		i = 0;
 		j++;
 	}
 }
 
 int	render_main(t_data *data)
 {
-	render_bg(data);
-	render_other(data);
+	if (data->map)
+	{
+		render_bg(data);
+		render_other(data);
+	}
+	else
+		ft_putendl_fd("BUG", STDOUT_FILENO);
 	return (0);
 }
 
@@ -79,9 +84,9 @@ void	window_utils(t_data *data)
 		return ;
 	}
 	mlx_loop_hook(data->mlx, &render_main, data);
-	// mlx_hook(data->win, 2, 1L << 0, print_key, &data);
-	mlx_hook(data->win, 17, 1L << 17, cross_close, &data);
-	mlx_key_hook(data->win, esc_close, &data);
+	mlx_hook(data->win, 2, 1L << 0, print_key, &data);
+	mlx_hook(data->win, 17, 1L << 17, cross_close, data);
+	mlx_key_hook(data->win, esc_close, data);
 	mlx_loop(data->mlx);
 	ft_stop(data);
 
@@ -89,5 +94,5 @@ void	window_utils(t_data *data)
 
 void	display_img(t_data *data, void *img, int x, int y)
 {
-	mlx_put_image_to_window(data->mlx, data->win, &img, data->image.img_width * x, data->image.img_height * y);
+	mlx_put_image_to_window(data->mlx, data->win, img, data->image.img_width * x, data->image.img_height * y);
 }
