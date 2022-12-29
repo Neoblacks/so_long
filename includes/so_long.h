@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/19 19:23:24 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/29 03:33:27 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	void	*img;
 	char	*addr;
 	int		line_length;
 	int		endian;
@@ -91,7 +90,7 @@ int	mouse_win(int x, int y, t_data *data);
 int	ft_strstr(const char *str, char *comp);
 
 int	ft_error(char *str);
-char	**map(char **str, t_data *data);
+void	map(char **str, t_data *data);
 char	**ft_parse_map(int fd, t_data *data);
 char	**ft_get_map(int fd);
 void	*ft_clean_map(t_data *data);

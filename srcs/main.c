@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/19 19:21:13 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/29 02:56:02 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int main(int argc, char **argv)
 		data.count = 0;
 		data.mlx = mlx_init();
 		ft_content(&(data.content));
-		data.map = map(argv, &(data));
+		// data.map = map(argv, &(data));
+		map(argv, &(data));
 		if (data.map != NULL)
 		{
 			ft_texture(&data);

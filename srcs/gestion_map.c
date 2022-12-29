@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/19 19:28:03 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/29 03:37:18 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ char **ft_get_map(int fd)
 			return (NULL);
 		backup = map;
 		map = ft_strjoin(backup, fichier);
-		// free(backup);
-		// free(fichier);
+		free(backup);
+		free(fichier);
 	}
 	map_final = ft_split(map, '\n');
 	free(map);
@@ -152,7 +152,7 @@ char **ft_parse_map(int fd, t_data *data)
 	return (data->map);
 }
 
-char **map(char **str, t_data *data)
+void map(char **str, t_data *data)
 {
 	int fd;
 
@@ -178,5 +178,5 @@ char **map(char **str, t_data *data)
 			ft_error("Error, need 1 P, 1 Exit, and 1 Co");
 		}
 	}
-	return (data->map);
+	// return (data->map);
 }
