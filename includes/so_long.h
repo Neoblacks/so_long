@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/29 03:33:27 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:01:12 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 # include <string.h>
 # include <stddef.h>
 # include <fcntl.h>
+# define ESC_KEY 65307
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
+# define UP_KEY 65362
+# define DOWN_KEY 65364
+# define LEFT_KEY 65361
+# define RIGHT_KEY 65363
 
 typedef struct s_vars
 {
@@ -85,7 +94,7 @@ typedef struct s_data
 
 int	esc_close(int keycode, t_data *data);
 int	cross_close(t_data *data);
-int	print_key(int keycode, t_data *data);
+int	move_key(int keycode, t_data *data);
 int	mouse_win(int x, int y, t_data *data);
 int	ft_strstr(const char *str, char *comp);
 
@@ -108,5 +117,12 @@ void	window_utils(t_data *data);
 void	render_other(t_data *data);
 void	render_bg(t_data *data);
 int	ft_stop(t_data *data);
+void ft_check_file(t_data *data);
+int	ft_count_collect(t_data *data);
+void	ft_move_top(t_data *data);
+void	ft_move_bot(t_data *data);
+void	ft_move_left(t_data *data);
+void	ft_move_right(t_data *data);
+
 
 # endif

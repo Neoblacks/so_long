@@ -6,11 +6,33 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/29 02:56:02 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:35:10 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+int	ft_count_collect(t_data *data)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	j = 0;
+	count = 0;
+	while (data->map[j])
+	{
+		i = 0;
+		while (data->map[j][i])
+		{
+			if (data->map[j][i]== data->content.collectible)
+				count++;
+			i++;
+		}
+		j++;
+	}
+	return (count);
+}
 
 int ft_strstr(const char *str, char *comp)
 {
@@ -64,10 +86,7 @@ int main(int argc, char **argv)
 	t_data data;
 
 	if (argc != 2)
-	{
 		ft_error("Error ! We need 1 argument .ber\n");
-		return (0);
-	}
 	else
 	{
 		data.count = 0;
@@ -75,6 +94,7 @@ int main(int argc, char **argv)
 		ft_content(&(data.content));
 		// data.map = map(argv, &(data));
 		map(argv, &(data));
+		//backtracking
 		if (data.map != NULL)
 		{
 			ft_texture(&data);

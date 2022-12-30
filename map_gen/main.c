@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:00:29 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/15 12:25:41 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:05:25 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(void)
 	}
 	data.map = add_player(data.map, data.width, data.height);
 	dprintf(data.fd, "%s", data.map);
+	printf("%s", data.map);
 	free(data.map);
 	return (0);
 }

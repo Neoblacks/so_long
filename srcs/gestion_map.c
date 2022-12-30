@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/29 03:37:18 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:35:44 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,12 @@ void map(char **str, t_data *data)
 	if (ft_strstr(str[1], ".ber") == EXIT_FAILURE)
 	{
 		ft_error("Error no correct format\n");
+		exit(1);
 	}
 	else
 	{
 		fd = open(str[1], O_RDONLY);
-		printf("FD : %d\n", fd);
+		// printf("FD : %d\n", fd);
 		if (fd > 0)
 		{
 			data->map = ft_parse_map(fd, data);
@@ -178,5 +179,4 @@ void map(char **str, t_data *data)
 			ft_error("Error, need 1 P, 1 Exit, and 1 Co");
 		}
 	}
-	// return (data->map);
 }

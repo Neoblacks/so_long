@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:25:58 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/29 03:33:45 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:00:30 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,23 @@ int cross_close(t_data *data)
 	exit(0);
 }
 
-int print_key(int keycode, t_data *data)
+int move_key(int keycode, t_data *data)
 {
-	(void)data;
-	printf("keycode: %d\n", keycode);
-	return (0);
-}
-
-int mouse_win(int x, int y, t_data *data)
-{
-	(void)data;
-	printf("x: %d, y: %d\n", x, y);
+	if (keycode == W_KEY || keycode == UP_KEY)
+	{
+		ft_move_top(data);
+	}
+	if (keycode == S_KEY || keycode == DOWN_KEY)
+	{
+		ft_move_bot(data);
+	}
+	if (keycode == A_KEY || keycode == LEFT_KEY)
+	{
+		ft_move_left(data);
+	}
+	if (keycode == D_KEY || keycode == RIGHT_KEY)
+	{
+		ft_move_right(data);
+	}
 	return (0);
 }

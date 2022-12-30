@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 12:22:25 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/29 03:18:30 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:42:02 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	ft_texture(t_data *data)
 	data->image.floor = "xpm/floor.xpm";
 	data->image.img_wall = mlx_xpm_file_to_image(data->mlx, data->image.wall, \
 		&(data->image.img_height), &(data->image.img_width));
-	if (data->image.img_wall == NULL)
-		ft_putendl_fd("NIQUE", STDOUT_FILENO);
 	data->image.img_player = mlx_xpm_file_to_image(data->mlx, \
 		data->image.player, &(data->image.img_height), \
 		&(data->image.img_width));
@@ -47,5 +45,49 @@ void	ft_texture(t_data *data)
 	data->image.img_collectible = mlx_xpm_file_to_image(data->mlx, \
 		data->image.collectible, &(data->image.img_height), \
 		&(data->image.img_width));
+	ft_check_file(data);
 }
-//FAIRE DU CHECK NULL ICI 
+
+void	ft_check_file(t_data *data)
+{
+	if (data->image.img_collectible == NULL)
+		ft_error("File collect.xpm doesn't exist\n");
+	if (data->image.img_exit == NULL)
+		ft_error("File exit.xpm doesn't exist\n");
+	if (data->image.img_floor == NULL)
+		ft_error("File floor.xpm doesn't exist\n");
+	if (data->image.img_wall == NULL)
+		ft_error("File wall.xpm doesn't exist\n");
+	if (data->image.img_player == NULL)
+		ft_error("File player.xpm doesn't exist\n");
+}
+
+// void	ft_check_file(t_data *data)
+// {
+// 	char	*files[5];
+// 	void	*images[5];
+// 	int		i;
+
+// 	files[0] = "collect.xpm";
+// 	files[1] = "exit.xpm";
+// 	files[2] = "floor.xpm";
+// 	files[3] = "wall.xpm";
+// 	files[4] = "player.xpm";
+
+// 	images[0] = data->image.img_collectible;
+// 	images[1] = data->image.img_exit;
+// 	images[2] = data->image.img_floor;
+// 	images[3] = data->image.img_wall;
+// 	images[4] = data->image.img_player;
+
+// 	i = 0;
+// 	while (i < 5)
+// 	{
+// 		if (images[i] == NULL)
+// 		{
+// 			printf("File %s doesn't exist\n", files[i]);
+// 			exit(1);
+// 		}
+// 		i++;
+// 	}
+// }

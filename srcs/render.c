@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/29 02:34:03 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:00:53 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ void	window_utils(t_data *data)
 		return ;
 	}
 	mlx_loop_hook(data->mlx, &render_main, data);
-	mlx_hook(data->win, 2, 1L << 0, print_key, &data);
+	mlx_hook(data->win, 2, 1L << 0, move_key, data);
 	mlx_hook(data->win, 17, 1L << 17, cross_close, data);
+	// mlx_hook(data->win, 6, 1L << 6, mouse_win, data);
 	mlx_key_hook(data->win, esc_close, data);
 	mlx_loop(data->mlx);
 	ft_stop(data);
