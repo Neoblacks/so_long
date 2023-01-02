@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/30 19:01:12 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/02 18:37:22 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,13 @@ void	render_bg(t_data *data);
 int	ft_stop(t_data *data);
 void ft_check_file(t_data *data);
 int	ft_count_collect(t_data *data);
-void	ft_move_top(t_data *data);
-void	ft_move_bot(t_data *data);
-void	ft_move_left(t_data *data);
-void	ft_move_right(t_data *data);
+void	ft_move(t_data *data, int direction);
+void	ft_update_pos(t_data *data, int pos_x, int pos_y);
+
+// void	ft_move_top(t_data *data);
+// void	ft_move_bot(t_data *data);
+// void	ft_move_left(t_data *data);
+// void	ft_move_right(t_data *data);
 
 
 # endif

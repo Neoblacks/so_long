@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/30 20:41:46 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:35:44 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ char **ft_parse_map(int fd, t_data *data)
 	i = 0;
 	data->map = ft_get_map(fd);
 	ft_check_content(data);
-	// if (ft_check_format(data->map) == EXIT_FAILURE)
-	// 	return (ft_clean_map(data));
+	if (ft_check_format(data->map) == EXIT_FAILURE)
+		return (ft_clean_map(data));
 	if (ft_check_line(data->map[0], data->content.wall) == EXIT_FAILURE)
 		return (ft_clean_map(data));
 	while (data->map[i] != NULL)

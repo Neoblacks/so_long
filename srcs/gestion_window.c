@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:25:58 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/30 19:00:30 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/02 18:36:43 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,35 @@ int cross_close(t_data *data)
 	exit(0);
 }
 
+// int move_key(int keycode, t_data *data)
+// {
+// 	if (keycode == W_KEY || keycode == UP_KEY)
+// 	{
+// 		ft_move_top(data);
+// 	}
+// 	if (keycode == S_KEY || keycode == DOWN_KEY)
+// 	{
+// 		ft_move_bot(data);
+// 	}
+// 	if (keycode == A_KEY || keycode == LEFT_KEY)
+// 	{
+// 		ft_move_left(data);
+// 	}
+// 	if (keycode == D_KEY || keycode == RIGHT_KEY)
+// 	{
+// 		ft_move_right(data);
+// 	}
+// 	return (0);
+// }
 int move_key(int keycode, t_data *data)
 {
 	if (keycode == W_KEY || keycode == UP_KEY)
-	{
-		ft_move_top(data);
-	}
-	if (keycode == S_KEY || keycode == DOWN_KEY)
-	{
-		ft_move_bot(data);
-	}
+		ft_move(data, 0);
+	else if (keycode == S_KEY || keycode == DOWN_KEY)
+		ft_move(data, 2);
 	if (keycode == A_KEY || keycode == LEFT_KEY)
-	{
-		ft_move_left(data);
-	}
-	if (keycode == D_KEY || keycode == RIGHT_KEY)
-	{
-		ft_move_right(data);
-	}
+		ft_move(data, 3);
+	else if (keycode == D_KEY || keycode == RIGHT_KEY)
+		ft_move(data, 1);
 	return (0);
 }

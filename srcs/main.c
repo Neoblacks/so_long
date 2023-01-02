@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/30 19:35:10 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:11:38 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,3 +105,6 @@ int main(int argc, char **argv)
 	}
 	return (1);
 }
+
+//make a solver sudoku
+
