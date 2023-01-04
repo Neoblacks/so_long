@@ -20,7 +20,7 @@ char *ft_addstr(char *str, char buffer)
 	i = 0;
 	if (str == NULL)
 		return NULL;
-	ret = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	ret = malloc(sizeof(char) * (ft_strlen(str) + 2)); // avoir le + 2 en plus 1
 	if (!ret)
 		return (NULL);
 	while (str[i] != '\0')
@@ -30,7 +30,7 @@ char *ft_addstr(char *str, char buffer)
 	}
 	free(str);
 	ret[i] = buffer;
-	ret[i++] = '\0';
+	ret[i++] = '\0'; //Incrementation avant le /0 pour le mettre au bon endroit
 	return (ret);
 }
 
@@ -89,7 +89,7 @@ void *ft_clean_map(t_data *data)
 // 		tmp = buffer;
 // 		while (count_char > 0)
 // 		{
-// 			buffer = ft_strjoin(buffer, line);
+// 			buffer = ft_strjoin(buffer, line); // A REGARDER POURQUOI CA MARCHE PAS 
 // 			free(tmp);
 // 			free(line);
 // 			line = ft_strdup("");
@@ -102,7 +102,7 @@ void *ft_clean_map(t_data *data)
 // 	return (NULL);
 // }
 
-char **ft_get_map(int fd)
+char **ft_get_map(int fd) //PAS TOUCHEYYYY
 {
 	char **map_final;
 	char *fichier;
@@ -149,7 +149,7 @@ char **ft_parse_map(int fd, t_data *data)
 	data->height = i;
 	if (ft_check_line(data->map[i - 1], data->content.wall) == EXIT_FAILURE)
 		return (ft_clean_map(data));
-	return (data->map);
+	return (data->map); //A enlever si je mets en void *
 }
 
 void map(char **str, t_data *data)
@@ -169,7 +169,7 @@ void map(char **str, t_data *data)
 		// printf("FD : %d\n", fd);
 		if (fd > 0)
 		{
-			data->map = ft_parse_map(fd, data);
+			data->map = ft_parse_map(fd, data); //VIRER LE data->map = si je mets ft_parse_map en void *
 		}
 		else
 			ft_error("Error, failed to open file\n");

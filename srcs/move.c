@@ -82,7 +82,6 @@
 // 	}
 // }
 
-
 void	ft_move_top(t_data *data)
 {
 	int	pos_x;
