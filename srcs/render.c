@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/30 19:00:53 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:33:52 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	render_bg(t_data *data)
 			i++;
 		}
 		j++;
-
 	}
 }
 
@@ -40,7 +39,6 @@ void	render_other(t_data *data)
 	int	j;
 
 	j = 0;
-	// ft_putendl_fd(data->map[j], STDOUT_FILENO);
 	while (data->map[j])
 	{
 		i = 0;
@@ -52,6 +50,8 @@ void	render_other(t_data *data)
 			{
 				data->pos.x = i * data->image.img_width;
 				data->pos.y = j * data->image.img_height;
+				// printf("Player position: %d, %d \n", data->pos.x, data->pos.y);
+				// printf("Player position: %d, %d \n", i, j);
 				display_img(data, data->image.img_player, i, j);
 			}
 			if (data->map[j][i] == data->content.exit)
@@ -64,13 +64,8 @@ void	render_other(t_data *data)
 
 int	render_main(t_data *data)
 {
-	if (data->map)
-	{
-		render_bg(data);
-		render_other(data);
-	}
-	else
-		ft_putendl_fd("BUG", STDOUT_FILENO);
+	render_bg(data);
+	render_other(data);
 	return (0);
 }
 
@@ -90,7 +85,6 @@ void	window_utils(t_data *data)
 	mlx_key_hook(data->win, esc_close, data);
 	mlx_loop(data->mlx);
 	ft_stop(data);
-
 }
 
 void	display_img(t_data *data, void *img, int x, int y)

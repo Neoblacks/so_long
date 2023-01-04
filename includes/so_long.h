@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/02 18:37:22 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:53:06 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,18 @@ typedef struct image_s
 	char	*exit;
 }	t_image;
 
+// typedef struct bfs_s
+// {
+// 	int n;
+// 	int i;
+// 	int j;
+// 	int visited[10];
+// 	int queue[10];
+// 	int front;
+// 	int rear;
+// 	int adj[10][10];
+// }
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -86,6 +98,9 @@ typedef struct s_data
 	char	**map;
 	int		width;
 	int		height;
+	int		player_weight;
+	int		exit_weight;
+	// t_bfs	bfs;
 	t_image	image;
 	t_vars	vars;
 	t_content content;
@@ -119,13 +134,16 @@ void	render_bg(t_data *data);
 int	ft_stop(t_data *data);
 void ft_check_file(t_data *data);
 int	ft_count_collect(t_data *data);
-void	ft_move(t_data *data, int direction);
-void	ft_update_pos(t_data *data, int pos_x, int pos_y);
+void	put_weight(t_data *data);
+int can_reach_exit(t_data *data);
+// void	ft_move(t_data *data, int direction);
+// void	ft_update_pos(t_data *data, int pos_x, int pos_y);
 
-// void	ft_move_top(t_data *data);
-// void	ft_move_bot(t_data *data);
-// void	ft_move_left(t_data *data);
-// void	ft_move_right(t_data *data);
+void	ft_move_top(t_data *data);
+void	ft_move_bot(t_data *data);
+void	ft_move_left(t_data *data);
+void	ft_move_right(t_data *data);
+
 
 
 # endif
