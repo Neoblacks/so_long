@@ -6,11 +6,14 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:15 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/30 19:40:38 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:39:24 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* TODO
+	- REFAIRE LES GESTIONS D ERREUR CAUSE LEAK */
 
 int	ft_check_column(char *map_line, char wall, t_data *data) // check line
 {

@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/04 16:53:31 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:27:59 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void *ft_clean_map(t_data *data)
 // 		tmp = buffer;
 // 		while (count_char > 0)
 // 		{
-// 			buffer = ft_strjoin(buffer, line); // A REGARDER POURQUOI CA MARCHE PAS 
+// 			buffer = ft_strjoin(buffer, line); // A REGARDER POURQUOI CA MARCHE PAS
 // 			free(tmp);
 // 			free(line);
 // 			line = ft_strdup("");
@@ -166,10 +166,9 @@ void map(char **str, t_data *data)
 	else
 	{
 		fd = open(str[1], O_RDONLY);
-		// printf("FD : %d\n", fd);
 		if (fd > 0)
 		{
-			data->map = ft_parse_map(fd, data); //VIRER LE data->map = si je mets ft_parse_map en void *
+			data->map = ft_parse_map(fd, data);  //VIRER LE data->map = si je mets ft_parse_map en void *
 		}
 		else
 			ft_error("Error, failed to open file\n");

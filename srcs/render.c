@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/04 15:33:52 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/06 11:50:37 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	render_other(t_data *data)
 	int	j;
 
 	j = 0;
+	//print nb row and nb col in map
+	// printf("nb row: %d, nb col: %d \n", data->width, data->height);
 	while (data->map[j])
 	{
 		i = 0;
@@ -48,8 +50,8 @@ void	render_other(t_data *data)
 				display_img(data, data->image.img_collectible, i, j);
 			if (data->map[j][i] == data->content.player)
 			{
-				data->pos.x = i * data->image.img_width;
-				data->pos.y = j * data->image.img_height;
+				data->coord_move.x = i * data->image.img_width;
+				data->coord_move.y = j * data->image.img_height;
 				// printf("Player position: %d, %d \n", data->pos.x, data->pos.y);
 				// printf("Player position: %d, %d \n", i, j);
 				display_img(data, data->image.img_player, i, j);

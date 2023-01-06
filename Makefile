@@ -16,7 +16,8 @@ SRCS = $(PATH_SRCS)/main.c \
 		$(PATH_SRCS)/check_map.c \
 		$(PATH_SRCS)/render.c \
 		$(PATH_SRCS)/move.c \
-# $(PATH_SRCS)/validate_map.c \
+		$(PATH_SRCS)/validate_map.c \
+		$(PATH_SRCS)/validate_map_utils.c \
 
 
 
