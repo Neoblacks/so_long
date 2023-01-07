@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   validate_map_utils2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 21:32:59 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:37:42 by amugnier         ###   ########.fr       */
+/*   Created: 2023/01/07 18:41:46 by amugnier          #+#    #+#             */
+/*   Updated: 2023/01/07 18:41:59 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-//WARNING = 1 (NO FREE)
-//ERROR = 2 (FREE)
-//CRITICAL = 3 (FREE)
-void	ft_error(char *str, int exit_code)
+void	set_queue(t_data *data, t_pos *pos)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		write(2, &str[i], 1);
-		i++;
-	}
-	if (exit_code == WARNING)
-	{
-		printf("WARNING");
-		exit(1);
-	}
-	else if (exit_code == ERROR)
-		printf("ERROR");
+	data->queue.debut = 0;
+	data->queue.fin = 1;
+	data->queue.array[0] = *pos;
 }
 
-void	ft_free_img(t_data *data)
+void	find_player(t_data *data)
 {
-	ft_stop(data);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			if (data->map[i][j] == 'P')
+			{
+				data->position.x = i;
+				data->position.y = j;
+			}
+			j++;
+		}
+		i++;
+	}
 }

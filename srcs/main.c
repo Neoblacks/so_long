@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/06 21:15:57 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:45:22 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_count_collect(t_data *data)
 		i = 0;
 		while (data->map[j][i])
 		{
-			if (data->map[j][i]== data->content.collectible)
+			if (data->map[j][i] == data->content.collectible)
 				count++;
 			i++;
 		}
@@ -34,10 +34,10 @@ int	ft_count_collect(t_data *data)
 	return (count);
 }
 
-int ft_strstr(const char *str, char *comp)
+int	ft_strstr(const char *str, char *comp)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -56,61 +56,22 @@ int ft_strstr(const char *str, char *comp)
 	return (EXIT_FAILURE);
 }
 
-void ft_free_visites(t_data *data)
+int	main(int argc, char **argv)
 {
-	int i;
-
-	i = 0;
-	while (data->voisin.visites[i])
-	{
-		free(data->voisin.visites[i]);
-		i++;
-	}
-	free(data->voisin.visites);
-}
-
-int	ft_stop(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data->map != NULL)
-	{
-		while (data->map[i] != NULL)
-		{
-			free(data->map[i]);
-			i++;
-		}
-		free(data->map);
-		mlx_destroy_image(data->mlx, data->image.img_wall);
-		mlx_destroy_image(data->mlx, data->image.img_floor);
-		mlx_destroy_image(data->mlx, data->image.img_exit);
-		mlx_destroy_image(data->mlx, data->image.img_player);
-		mlx_destroy_image(data->mlx, data->image.img_collectible);
-		mlx_destroy_window(data->mlx, data->win);
-	}
-	mlx_destroy_display(data->mlx);
-	ft_free_visites(data);
-	free(data->mlx);
-	exit(0);
-}
-
-int main(int argc, char **argv)
-{
-	t_data data;
+	t_data	data;
 	int		deplacements[4][2];
 
 	if (argc != 2)
-		ft_error("Error ! We need 1 argument .ber\n");
+		ft_error("Error ! We need 1 argument .ber\n", WARNING); //PAS DE FREE
 	else
 	{
 		data.count = 0;
+		ft_content(&(data.content));
+		map(argv, &(data)); //NE PLUS TOUCHER
+		check_find_collect_exit(&data, deplacements);
 		data.mlx = mlx_init();
 		if (!data.mlx)
 			return (1);
-		ft_content(&(data.content));
-		map(argv, &(data));
-		check_find_collect_exit(&data, deplacements);
 		if (data.map != NULL)
 		{
 			ft_texture(&data);

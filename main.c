@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 18:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/06 20:14:42 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/07 12:31:55 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void check_find_collect_exit(char grille[N][M], t_data *data, bool visites[N][M]
 {
 	if (find_collect_exit(grille, data, visites, deplacements) == EXIT_FAILURE)
 	{
-		ft_error("La map n'est pas valide.");
+		printf("Le Collectible (C) et la sortie (E) ne peuvent être atteints depuis la position de départ du P.\n");
 	}
 	// else
 	// {

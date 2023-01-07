@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/06 21:18:30 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:47:40 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	check_voisin(t_data *data, int deplacements[4][2])
 	{
 		data->voisin.x_voisin = data->position.x + deplacements[i][0];
 		data->voisin.y_voisin = data->position.y + deplacements[i][1];
-		if (is_valid(data->voisin.x_voisin, data->voisin.y_voisin, data) && !data->voisin.visites[data->voisin.x_voisin][data->voisin.y_voisin])
+		if (is_valid(data->voisin.x_voisin, data->voisin.y_voisin, data) && \
+			!data->voisin.visites[data->voisin.x_voisin][data->voisin.y_voisin])
 		{
 			data->voisin.visites[data->voisin.x_voisin][data->voisin.y_voisin] = true;
 			set_pos(&data->queue.array[data->queue.fin], data->voisin.x_voisin, data->voisin.y_voisin);
@@ -69,12 +70,13 @@ int	browse_grille(t_data *data, int deplacements[4][2])
 	return (EXIT_FAILURE);
 }
 
-int find_collect_exit(t_data *data, int deplacements[4][2])
+int	find_collect_exit(t_data *data, int deplacements[4][2])
 {
-	int result;
+	int	result;
 
 	init_deplacement(deplacements);
 	find_player(data);
+	alloc_array(data);
 	set_queue(data, &data->position);
 	set_pos(&data->queue.array[data->queue.debut], data->position.x, data->position.y);
 	init_visites(data);
@@ -83,11 +85,12 @@ int find_collect_exit(t_data *data, int deplacements[4][2])
 	return (result);
 }
 
-void check_find_collect_exit(t_data *data, int deplacements[4][2])
+void	check_find_collect_exit(t_data *data, int deplacements[4][2])
 {
 	if (find_collect_exit(data, deplacements) == EXIT_FAILURE)
 	{
-		ft_free_visites(data);
+		ft_error("Le joueur n'a pas pu atteindre la sortie ou les collectibles.", ERROR); //FREE MLX, ARRAY, MAP, VISITES
+		// ft_free_visites(data);
 		ft_clean_map(data);
 	}
 }

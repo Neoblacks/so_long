@@ -6,7 +6,7 @@
 #    By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 17:55:30 by amugnier          #+#    #+#              #
-#    Updated: 2022/12/12 12:36:16 by amugnier         ###   ########.fr        #
+#    Updated: 2023/01/07 18:52:56 by amugnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,7 @@ SRCS = ft_atoi.c \
 	  ft_toupper.c \
 	  get_next_line.c \
 	  get_next_line_utils.c \
-
-SRCS_BONUS = ft_lstadd_back.c \
+	  ft_lstadd_back.c \
 	  ft_lstadd_front.c \
 	  ft_lstclear.c \
 	  ft_lstdelone.c \
@@ -70,11 +69,6 @@ FLAGS = -Wall -Werror -Wextra
 
 OPTION = -c
 
-ifeq (bonus, $(findstring bonus, $(MAKECMDGOALS)))
-	SRCS += $(SRCS_BONUS)
-
-endif
-
 .c.o:
 	cc $(FLAGS) $(OPTION) $< -o $(<:.c=.o) -I $(PATH_HEADER)
 
@@ -83,8 +77,6 @@ $(NAME): $(OBJ)
 
 all: $(NAME)
 
-bonus: $(NAME)
-
 clean:
 	rm -f $(OBJ) $(OBJS_BONUS)
 
@@ -92,3 +84,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

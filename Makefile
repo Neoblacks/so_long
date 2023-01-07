@@ -4,7 +4,9 @@ PATH_LIBFT = libft
 LIBFT = $(PATH_LIBFT)/libft.a
 
 PATH_MLX = mlx
-MLX = $(PATH_MLX)/libmlx.a -I $(PATH_MLX) -L $(PATH_MLX) -lmlx -lXext -lX11 -lm
+MLX = $(PATH_MLX)/libmlx.a
+
+LINKER_FLAGS = -lXext -lX11 -lm
 
 PATH_SRCS = srcs
 
@@ -18,8 +20,8 @@ SRCS = $(PATH_SRCS)/main.c \
 		$(PATH_SRCS)/move.c \
 		$(PATH_SRCS)/validate_map.c \
 		$(PATH_SRCS)/validate_map_utils.c \
-
-
+		$(PATH_SRCS)/validate_map_utils2.c \
+		$(PATH_SRCS)/end.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -31,8 +33,8 @@ RM = rm -f
 
 all: $(LIBFT) $(MLX) $(NAME)
 
-$(NAME): $(OBJS) $(MLX)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LINKER_FLAGS) $(MLX)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(PATH_MLX) -I $(PATH_LIBFT) -I $(PATH_SRCS)
@@ -50,7 +52,6 @@ clean:
 
 fclean: clean
 	$(MAKE) -C $(PATH_LIBFT) fclean
-	$(MAKE) -C $(PATH_MLX) clean
 	$(RM) $(NAME)
 
 re: fclean all

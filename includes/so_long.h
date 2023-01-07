@@ -6,36 +6,38 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/06 21:13:47 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:29:00 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-#include "../libft/libft.h"
-#include "../mlx/mlx.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <stddef.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#define M 15
-#define N 5
-#define ESC_KEY 65307
-#define W_KEY 119
-#define A_KEY 97
-#define S_KEY 115
-#define D_KEY 100
-#define UP_KEY 65362
-#define DOWN_KEY 65364
-#define LEFT_KEY 65361
-#define RIGHT_KEY 65363
-#define P_KEY 112
-#define O_KEY 111
-
+# include "../libft/libft.h"
+# include "../mlx/mlx.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <stddef.h>
+# include <fcntl.h>
+# include <stdbool.h>
+# define ESC_KEY 65307
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
+# define UP_KEY 65362
+# define DOWN_KEY 65364
+# define LEFT_KEY 65361
+# define RIGHT_KEY 65363
+# define P_KEY 112
+# define O_KEY 111
+# define WARNING 1
+# define ERROR 2
+# define CRITICAL 3
+# define SUCCESS 0
+# define FAILURE 1
 typedef struct s_vars
 {
 	int win_height;
@@ -62,7 +64,7 @@ typedef struct s_queue
 {
 	int debut;
 	int fin;
-	t_pos array[N * M];
+	t_pos *array;
 } t_queue;
 
 typedef struct s_voisin
@@ -127,8 +129,10 @@ int cross_close(t_data *data);
 int move_key(int keycode, t_data *data);
 int mouse_win(int x, int y, t_data *data);
 int ft_strstr(const char *str, char *comp);
+void	alloc_array(t_data *data);
 
-int ft_error(char *str);
+void ft_error(char *str, int exit_code);
+void ft_free_img(t_data *data);
 void map(char **str, t_data *data);
 char **ft_parse_map(int fd, t_data *data);
 char **ft_get_map(int fd);
@@ -165,6 +169,8 @@ int find_collect_exit(t_data *data, int deplacements[4][2]);
 void check_find_collect_exit(t_data *data, int deplacements[4][2]);
 void	alloc_visites(t_data *data);
 void ft_free_visites(t_data *data);
+void ft_free_array(t_data *data);
+void	ft_close(t_data *data);
 // void	ft_move(t_data *data, int direction);
 // void	ft_update_pos(t_data *data, int pos_x, int pos_y);
 

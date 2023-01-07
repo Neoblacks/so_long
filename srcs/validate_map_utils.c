@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/06 21:07:12 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:43:59 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,33 @@ void	init_deplacement(int deplacements[4][2])
 	}
 }
 
+void	alloc_array(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->queue.array = malloc(sizeof(t_pos) * data->height * data->width);
+	while (i < data->height * data->width)
+	{
+		data->queue.array[i].x = 0;
+		data->queue.array[i].y = 0;
+		i++;
+	}
+}
+
 void	alloc_visites(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	data->voisin.visites = malloc(sizeof(bool *) * data->height);
+	data->voisin.visites = malloc(sizeof(bool *) * (data->height + 1));
+	/* TODO PROTECT MALLOC */
 	while (i < data->height)
 	{
-		data->voisin.visites[i] = malloc(sizeof(bool) * data->width);
+		data->voisin.visites[i] = malloc(sizeof(bool) * (data->width));
 		i++;
 	}
+	data->voisin.visites[i] = NULL;
 }
 
 void	init_visites(t_data *data)
@@ -59,36 +75,6 @@ void	init_visites(t_data *data)
 		while (j < data->width)
 		{
 			data->voisin.visites[i][j] = false;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	set_queue(t_data *data, t_pos *pos)
-{
-	data->queue.debut = 0;
-	data->queue.fin = 1;
-	data->queue.array[0] = *pos;
-}
-
-void	find_player(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < data->height)
-	{
-		j = 0;
-		while (j < data->width)
-		{
-			if (data->map[i][j] == 'P')
-			{
-				data->position.x = i;
-				data->position.y = j;
-			}
 			j++;
 		}
 		i++;

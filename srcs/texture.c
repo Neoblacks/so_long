@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 12:22:25 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/06 15:22:58 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:02:03 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,43 +51,13 @@ void	ft_texture(t_data *data)
 void	ft_check_file(t_data *data)
 {
 	if (data->image.img_collectible == NULL)
-		ft_error("File collect.xpm doesn't exist\n");
+		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT COLLECTIBLE //LEAK
 	if (data->image.img_exit == NULL)
-		ft_error("File exit.xpm doesn't exist\n");
+		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT EXIT //LEAK
 	if (data->image.img_floor == NULL)
-		ft_error("File floor.xpm doesn't exist\n");
-	if (data->image.img_wall == NULL)
-		ft_error("File wall.xpm doesn't exist\n");
+		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT FLOOR //LEAK
 	if (data->image.img_player == NULL)
-		ft_error("File player.xpm doesn't exist\n");
+		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT PLAYER //LEAK
+	if (data->image.img_wall == NULL)
+		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT WALL //LEAK
 }
-
-// void	ft_check_file(t_data *data)
-// {
-// 	char	*files[5];
-// 	void	*images[5];
-// 	int		i;
-
-// 	files[0] = "collect.xpm";
-// 	files[1] = "exit.xpm";
-// 	files[2] = "floor.xpm";
-// 	files[3] = "wall.xpm";
-// 	files[4] = "player.xpm";
-
-// 	images[0] = data->image.img_collectible;
-// 	images[1] = data->image.img_exit;
-// 	images[2] = data->image.img_floor;
-// 	images[3] = data->image.img_wall;
-// 	images[4] = data->image.img_player;
-
-// 	i = 0;
-// 	while (i < 5)
-// 	{
-// 		if (images[i] == NULL)
-// 		{
-// 			printf("File %s doesn't exist\n", files[i]);
-// 			exit(1);
-// 		}
-// 		i++;
-// 	}
-// }
