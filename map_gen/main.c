@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:00:29 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/30 16:05:25 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/07 19:04:51 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 	t_data	data;
 
 	data.count_map = 10;
-	data.fd = open("../map/map.ber", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	data.fd = open("../map/map_gen.ber", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	srand(time(NULL));
 	data.width = rand() % 10 + 10;
 	data.height = rand() % 10 + 10;
