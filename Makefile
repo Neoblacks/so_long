@@ -22,6 +22,7 @@ SRCS = $(PATH_SRCS)/main.c \
 		$(PATH_SRCS)/validate_map_utils.c \
 		$(PATH_SRCS)/validate_map_utils2.c \
 		$(PATH_SRCS)/end.c \
+		$(PATH_SRCS)/end_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 

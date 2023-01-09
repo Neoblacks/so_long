@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:43:59 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:34:30 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,34 @@ void	alloc_array(t_data *data)
 	}
 }
 
-void	alloc_visites(t_data *data)
+void	alloc_visits(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	data->voisin.visites = malloc(sizeof(bool *) * (data->height + 1));
+	data->near.visits = malloc(sizeof(bool *) * (data->height + 1));
 	/* TODO PROTECT MALLOC */
 	while (i < data->height)
 	{
-		data->voisin.visites[i] = malloc(sizeof(bool) * (data->width));
+		data->near.visits[i] = malloc(sizeof(bool) * (data->width));
 		i++;
 	}
-	data->voisin.visites[i] = NULL;
+	data->near.visits[i] = NULL;
 }
 
-void	init_visites(t_data *data)
+void	init_visits(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	alloc_visites(data);
+	alloc_visits(data);
 	while (i < data->height)
 	{
 		j = 0;
 		while (j < data->width)
 		{
-			data->voisin.visites[i][j] = false;
+			data->near.visits[i][j] = false;
 			j++;
 		}
 		i++;

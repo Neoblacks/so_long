@@ -6,24 +6,24 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:49:22 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:40:41 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:02:08 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	ft_free_visites(t_data *data)
+void	ft_free_visits(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (data->voisin.visites[i])
+	while (data->near.visits[i])
 	{
-		free(data->voisin.visites[i]);
+		free(data->near.visits[i]);
 		printf("I = %d", i);
 		i++;
 	}
-	free(data->voisin.visites);
+	free(data->near.visits);
 }
 
 void	ft_free_array(t_data *data)
@@ -31,7 +31,7 @@ void	ft_free_array(t_data *data)
 	free(data->queue.array);
 }
 
-int	ft_stop(t_data *data)
+void	ft_stop(t_data *data, bool code)
 {
 	int	i;
 
@@ -44,18 +44,20 @@ int	ft_stop(t_data *data)
 			i++;
 		}
 		free(data->map);
-		mlx_destroy_image(data->mlx, data->image.img_wall);
-		mlx_destroy_image(data->mlx, data->image.img_floor);
-		mlx_destroy_image(data->mlx, data->image.img_exit);
-		mlx_destroy_image(data->mlx, data->image.img_player);
-		mlx_destroy_image(data->mlx, data->image.img_collectible);
-		mlx_destroy_window(data->mlx, data->win);
+		ft_destroy_img(data);
+		if (data->win != NULL)
+			mlx_destroy_window(data->mlx, data->win);
 	}
 	mlx_destroy_display(data->mlx);
-	ft_free_visites(data);
-	ft_free_array(data);
+	if (data->near.visits != NULL)
+		ft_free_visits(data);
+	if (data->queue.array != NULL)
+		ft_free_array(data);
 	free(data->mlx);
-	exit(0);
+	if (code == SUCCESS)
+		exit(0);
+	else
+		exit(1);
 }
 
 void	*ft_clean_map(t_data *data)
@@ -73,4 +75,25 @@ void	*ft_clean_map(t_data *data)
 	free(data->map);
 	data->map = NULL;
 	return (0);
+}
+
+int	ft_urgency(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->map != NULL)
+	{
+		while (data->map[i] != NULL)
+		{
+			free(data->map[i]);
+			i++;
+		}
+		free(data->map);
+		ft_destroy_img(data);
+		mlx_destroy_window(data->mlx, data->win);
+	}
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
+	exit(1);
 }

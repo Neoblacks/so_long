@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:37:18 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 14:59:06 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	window_utils(t_data *data)
 		(data->height * data->image.img_height), "So long");
 	if (data->win == NULL)
 	{
-		ft_error("Error\nWindow not created", CRITICAL);
-		free(data->mlx);
+		ft_error("Error\nWindow not created");
+		ft_stop(data, FAIL);
 		return ;
 	}
 	mlx_loop_hook(data->mlx, &render_main, data);
@@ -83,7 +83,7 @@ void	window_utils(t_data *data)
 	mlx_hook(data->win, 17, 1L << 17, cross_close, data);
 	mlx_key_hook(data->win, esc_close, data);
 	mlx_loop(data->mlx);
-	ft_stop(data);
+	ft_stop(data, SUCCESS);
 }
 
 void	display_img(t_data *data, void *img, int x, int y)

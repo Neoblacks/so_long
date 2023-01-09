@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:47:40 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:34:31 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,21 @@ bool	is_valid(int x, int y, t_data *data)
 	return (true);
 }
 
-void	check_voisin(t_data *data, int deplacements[4][2])
+void	check_near(t_data *data, int deplacements[4][2])
 {
 	int			i;
 
 	i = 0;
 	while (i < 4)
 	{
-		data->voisin.x_voisin = data->position.x + deplacements[i][0];
-		data->voisin.y_voisin = data->position.y + deplacements[i][1];
-		if (is_valid(data->voisin.x_voisin, data->voisin.y_voisin, data) && \
-			!data->voisin.visites[data->voisin.x_voisin][data->voisin.y_voisin])
+		data->near.x_near = data->position.x + deplacements[i][0];
+		data->near.y_near = data->position.y + deplacements[i][1];
+		if (is_valid(data->near.x_near, data->near.y_near, data) && \
+			!data->near.visits[data->near.x_near][data->near.y_near])
 		{
-			data->voisin.visites[data->voisin.x_voisin][data->voisin.y_voisin] = true;
-			set_pos(&data->queue.array[data->queue.fin], data->voisin.x_voisin, data->voisin.y_voisin);
+			data->near.visits[data->near.x_near][data->near.y_near] = true;
+			set_pos(&data->queue.array[data->queue.fin], \
+				data->near.x_near, data->near.y_near);
 			data->queue.fin++;
 		}
 		i++;
@@ -56,7 +57,8 @@ int	browse_grille(t_data *data, int deplacements[4][2])
 	{
 		data->position = data->queue.array[data->queue.debut];
 		data->queue.debut++;
-		if (data->map[data->position.x][data->position.y] == 'C' || data->map[data->position.x][data->position.y] == 'E')
+		if (data->map[data->position.x][data->position.y] == 'C' \
+			|| data->map[data->position.x][data->position.y] == 'E')
 		{
 			if (data->map[data->position.x][data->position.y] == 'C')
 				collec_found = 1;
@@ -65,9 +67,9 @@ int	browse_grille(t_data *data, int deplacements[4][2])
 			if (collec_found && exit_found)
 				return (EXIT_SUCCESS);
 		}
-		check_voisin(data, deplacements);
+		check_near(data, deplacements);
 	}
-	return (EXIT_FAILURE);
+	return (FAIL);
 }
 
 int	find_collect_exit(t_data *data, int deplacements[4][2])
@@ -78,19 +80,19 @@ int	find_collect_exit(t_data *data, int deplacements[4][2])
 	find_player(data);
 	alloc_array(data);
 	set_queue(data, &data->position);
-	set_pos(&data->queue.array[data->queue.debut], data->position.x, data->position.y);
-	init_visites(data);
-	data->voisin.visites[data->position.x][data->position.y] = true;
+	set_pos(&data->queue.array[data->queue.debut], \
+		data->position.x, data->position.y);
+	init_visits(data);
+	data->near.visits[data->position.x][data->position.y] = true;
 	result = browse_grille(data, deplacements);
 	return (result);
 }
 
 void	check_find_collect_exit(t_data *data, int deplacements[4][2])
 {
-	if (find_collect_exit(data, deplacements) == EXIT_FAILURE)
+	if (find_collect_exit(data, deplacements) == FAIL)
 	{
-		ft_error("Le joueur n'a pas pu atteindre la sortie ou les collectibles.", ERROR); //FREE MLX, ARRAY, MAP, VISITES
-		// ft_free_visites(data);
+		ft_error("Error \n Player can't get exit or collectible");
 		ft_clean_map(data);
 	}
 }

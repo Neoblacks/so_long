@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   end_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 21:32:59 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 12:16:37 by amugnier         ###   ########.fr       */
+/*   Created: 2023/01/09 12:26:24 by amugnier          #+#    #+#             */
+/*   Updated: 2023/01/09 15:00:38 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	ft_error(char *str)
+void	ft_destroy_img(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		write(2, &str[i], 1);
-		i++;
-	}
+	mlx_destroy_image(data->mlx, data->image.img_wall);
+	mlx_destroy_image(data->mlx, data->image.img_floor);
+	mlx_destroy_image(data->mlx, data->image.img_exit);
+	mlx_destroy_image(data->mlx, data->image.img_player);
+	mlx_destroy_image(data->mlx, data->image.img_collectible);
 }

@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:15 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:39:10 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:25:51 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_check_column(char *map_line, char wall, t_data *data)
 		i++;
 	if (map_line[0] != wall || map_line[i - 1] != wall)
 	{
-		ft_error("Error, Map column are not close\n", ERROR);
-		return (EXIT_FAILURE);
+		ft_error("Error, Map column are not close\n");
+		return (FAIL);
 	}
 	data->width = i;
 	return (EXIT_SUCCESS);
@@ -37,8 +37,8 @@ int	ft_check_line(char *map_line, char wall)
 	{
 		if (map_line[i] != wall)
 		{
-			ft_error("Error, Map line are not close\n", ERROR);
-			return (EXIT_FAILURE);
+			ft_error("Error, Map line are not close\n");
+			return (FAIL);
 		}
 		i++;
 	}
@@ -54,15 +54,15 @@ int	ft_check_other(char *map_line, t_content *content)
 	{
 		if (content->count_exit > 1 || content->count_player > 1)
 		{
-			ft_error("Error, Bad number of exit or player\n", ERROR);
-			return (EXIT_FAILURE);
+			ft_error("Error, Bad number of exit or player\n");
+			return (FAIL);
 		}
 		if (map_line[i] != content->wall && map_line[i] != content->player \
 			&& map_line[i] != content->exit && map_line[i] \
 			!= content->collectible && map_line[i] != '0')
 		{
-			ft_error("Error, Bad symbol in map", ERROR);
-			return (EXIT_FAILURE);
+			ft_error("Error, Bad symbol in map");
+			return (FAIL);
 		}
 		i++;
 	}
@@ -110,8 +110,8 @@ int	ft_check_format(char **map)
 			width++;
 		if (width != count_width)
 		{
-			ft_error("Error, Map is not a rectangle", ERROR);
-			exit(EXIT_FAILURE);
+			ft_error("Error, Map is not a rectangle");
+			return (FAIL);
 		}
 		width = 0;
 		height++;

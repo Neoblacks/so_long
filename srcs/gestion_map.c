@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:35:04 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:28:47 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_addstr(char *str, char buffer)
 	return (ret);
 }
 
-int	count_char_gnl(int fd, char **str)
+int	count_char_gnl(int fd, char **str) // Check si le fichier est vide a use
 {
 	char	buffer;
 	int		ret;
@@ -92,22 +92,22 @@ char	**ft_parse_map(int fd, t_data *data)
 	i = 0;
 	data->map = ft_get_map(fd);
 	ft_check_content(data);
-	if (ft_check_format(data->map) == EXIT_FAILURE)
+	if (ft_check_format(data->map) == FAIL)
 		return (ft_clean_map(data));
-	if (ft_check_line(data->map[0], data->content.wall) == EXIT_FAILURE)
+	if (ft_check_line(data->map[0], data->content.wall) == FAIL)
 		return (ft_clean_map(data));
 	while (data->map[i] != NULL)
 	{
-		if (ft_check_column(data->map[i], data->content.wall, data) == FAILURE)
+		if (ft_check_column(data->map[i], data->content.wall, data) == FAIL)
 			return (ft_clean_map(data));
-		else if (ft_check_other(data->map[i], &(data->content)) == EXIT_FAILURE)
+		else if (ft_check_other(data->map[i], &(data->content)) == FAIL)
 			return (ft_clean_map(data));
 		i++;
 	}
 	data->height = i;
-	if (ft_check_line(data->map[i - 1], data->content.wall) == EXIT_FAILURE)
+	if (ft_check_line(data->map[i - 1], data->content.wall) == FAIL)
 		return (ft_clean_map(data));
-	return (data->map); //A enlever si je mets en void *
+	return (data->map);
 }
 
 void	map(char **str, t_data *data)
@@ -116,23 +116,28 @@ void	map(char **str, t_data *data)
 
 	fd = 0;
 	data->map = NULL;
-	if (ft_strstr(str[1], ".ber") == EXIT_FAILURE)
-		ft_error("Error no correct format\n", WARNING);
+	if (ft_strstr(str[1], ".ber") == FAIL)
+	{
+		ft_error("Error no correct format\n"); //make function to norme
+		exit(1);
+	}
 	else
 	{
 		fd = open(str[1], O_RDONLY);
 		if (fd > 0)
-		{
 			data->map = ft_parse_map(fd, data);
-		}
 		else
-			ft_error("Error, failed to open file\n", WARNING);
+		{
+			ft_error("Error, failed to open file\n");
+			exit(1);
+		}
 		if ((data->content.count_collectible == 0 || \
 			data->content.count_exit != 1 || data->content.count_player != 1) \
 				&& data->map != NULL)
 		{
 			ft_clean_map(data);
-			ft_error("Error, need 1 P, 1 Exit, and 1 Co", WARNING);
+			ft_error("Error, need 1 P, 1 Exit, and 1 Co");
+			exit(1);
 		}
 	}
 }

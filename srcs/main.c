@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:45:22 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:23:46 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,19 @@ int	ft_strstr(const char *str, char *comp)
 			j = 0;
 		i++;
 	}
-	return (EXIT_FAILURE);
+	return (FAIL);
+}
+
+void	ft_check_data_map(t_data *data, int deplacements[4][2])
+{
+	if (data->map != NULL)
+	{
+		check_find_collect_exit(data, deplacements);
+		ft_texture(data);
+		window_utils(data);
+	}
+	else
+		ft_urgency(data);
 }
 
 int	main(int argc, char **argv)
@@ -62,23 +74,19 @@ int	main(int argc, char **argv)
 	int		deplacements[4][2];
 
 	if (argc != 2)
-		ft_error("Error ! We need 1 argument .ber\n", WARNING); //PAS DE FREE
+	{
+		ft_error("Error ! We need 1 argument .ber\n");
+		exit(1);
+	}
 	else
 	{
 		data.count = 0;
 		ft_content(&(data.content));
-		map(argv, &(data)); //NE PLUS TOUCHER
-		check_find_collect_exit(&data, deplacements);
+		map(argv, &(data));
 		data.mlx = mlx_init();
 		if (!data.mlx)
 			return (1);
-		if (data.map != NULL)
-		{
-			ft_texture(&data);
-			window_utils(&data);
-		}
-		else
-			ft_stop(&data);
+		ft_check_data_map(&data, deplacements);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 12:22:25 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:02:03 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:17:27 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	ft_texture(t_data *data)
 void	ft_check_file(t_data *data)
 {
 	if (data->image.img_collectible == NULL)
-		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT COLLECTIBLE //LEAK
+		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT COLLECTIBLE //LEAK
 	if (data->image.img_exit == NULL)
-		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT EXIT //LEAK
+		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT EXIT //LEAK
 	if (data->image.img_floor == NULL)
-		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT FLOOR //LEAK
+		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT FLOOR //LEAK
 	if (data->image.img_player == NULL)
-		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT PLAYER //LEAK
+		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT PLAYER //LEAK
 	if (data->image.img_wall == NULL)
-		ft_error("FILE NOT FOUND", ERROR); //DESTROY ALL IMAGE WITHOUT WALL //LEAK
+		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT WALL //LEAK
 }

@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:25:58 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:48:40 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 14:58:37 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	esc_close(int keycode, t_data *data)
 {
 	if (keycode == ESC_KEY)
 	{
-		ft_stop(data);
+		ft_stop(data, SUCCESS);
 	}
 	return (0);
 }
 
 int	cross_close(t_data *data)
 {
-	ft_stop(data);
+	ft_stop(data, SUCCESS);
 	return (0);
 }
 
