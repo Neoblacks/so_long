@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:41:46 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/07 18:41:59 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:01:55 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,18 @@ void	find_player(t_data *data)
 			j++;
 		}
 		i++;
+	}
+}
+
+void	ft_check_malloc_visit(t_data *data)
+{
+	if (data->queue.array == NULL)
+	{
+		ft_error("Error\nMalloc failed");
+		ft_clean_map(data);
+		mlx_destroy_display(data->mlx);
+		ft_free_array(data);
+		free(data->mlx);
+		exit(1);
 	}
 }

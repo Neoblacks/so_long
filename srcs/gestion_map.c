@@ -6,56 +6,60 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 12:28:47 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:05:13 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-char	*ft_addstr(char *str, char buffer)
-{
-	int		i;
-	char	*ret;
+// char	*ft_addstr(char *str, char buffer)
+// {
+// 	int		i;
+// 	char	*ret;
 
-	i = 0;
-	if (str == NULL)
-		return (NULL);
-	ret = malloc(sizeof(char) * (ft_strlen(str) + 2)); // avoir le + 2 en plus 1
-	if (!ret)
-		return (NULL);
-	while (str[i] != '\0')
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	free(str);
-	ret[i] = buffer;
-	ret[i++] = '\0'; //Incrementation avant le /0 pour le mettre au bon endroit
-	return (ret);
-}
+// 	i = 0;
+// 	if (str == NULL)
+// 		return (NULL);
+// 	ret = malloc(sizeof(char) * (ft_strlen(str) + 2));
+// 	if (!ret)
+// 		return (NULL);
+// 	while (str[i] != '\0')
+// 	{
+// 		ret[i] = str[i];
+// 		i++;
+// 	}
+// 	free(str);
+// 	ret[i] = buffer;
+// 	ret[++i] = '\0';
+// 	return (ret);
+// }
 
-int	count_char_gnl(int fd, char **str) // Check si le fichier est vide a use
-{
-	char	buffer;
-	int		ret;
+// int	count_char_gnl(int fd, char **str)
+// {
+// 	char	buffer;
+// 	int		ret;
 
-	ret = read(fd, &buffer, 1);
-	while (ret > 0)
-	{
-		*str = ft_addstr(*str, buffer);
-		if (buffer == '\n')
-			return (ret);
-		else
-			ret = ret + 1;
-		ret = read(fd, &buffer, 1);
-	}
-	if (ret == 0)
-	{
-		free(*str);
-		*str = NULL;
-	}
-	return (ret);
-}
+// 	ret = read(fd, buffer, 1);
+// 	ft_printf("buffer = %c", buffer);
+// 	ft_printf("fd = %d", fd);
+// 	ft_printf("ret = %d\n", ret);
+// 	// write(1, "debug", 5);
+// 	while (ret > 0)
+// 	{
+// 		*str = ft_addstr(*str, buffer);
+// 		if (buffer == '\n')
+// 			return (ret);
+// 		else
+// 			ret = ret + 1;
+// 		ret = read(fd, &buffer, 1);
+// 	}
+// 	if (ret == 0)
+// 	{
+// 		free(*str);
+// 		*str = NULL;
+// 	}
+// 	return (ret);
+// }
 
 char	**ft_get_map(int fd)
 {
@@ -118,14 +122,16 @@ void	map(char **str, t_data *data)
 	data->map = NULL;
 	if (ft_strstr(str[1], ".ber") == FAIL)
 	{
-		ft_error("Error no correct format\n"); //make function to norme
+		ft_error("Error no correct format\n");
 		exit(1);
 	}
 	else
 	{
 		fd = open(str[1], O_RDONLY);
 		if (fd > 0)
+		{
 			data->map = ft_parse_map(fd, data);
+		}
 		else
 		{
 			ft_error("Error, failed to open file\n");

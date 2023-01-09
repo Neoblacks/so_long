@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 15:01:42 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:51:15 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@
 # define O_KEY 111
 # define SUCCESS 0
 # define FAIL 1
+
+typedef enum e_component
+{
+	IMG_WALL,
+	IMG_PLAYER,
+	IMG_COLLECTIBLE,
+	IMG_FLOOR,
+	IMG_EXIT,
+}	t_component;
 
 /*
  * Section 2 : Initialisation of Structs
@@ -149,7 +158,7 @@ void	ft_check_content(t_data *data);
 
 /* END.C + END_UTILS.c */
 
-void		ft_stop(t_data *data, bool code);
+void	ft_stop(t_data *data, bool code);
 int		ft_urgency(t_data *data);
 int		ft_critical(t_data *data);
 void	ft_free_array(t_data *data);
@@ -161,7 +170,7 @@ void	ft_error(char *str);
 
 /* GESTION_MAP.c */
 
-int		count_char_gnl(int fd, char **str);
+int		count_char_gnl(int fd, char *str);
 void	map(char **str, t_data *data);
 char	*ft_addstr(char *str, char buffer);
 char	**ft_parse_map(int fd, t_data *data);
@@ -190,6 +199,7 @@ void	display_img(t_data *data, void *img, int x, int y);
 void	ft_content(t_content *content);
 void	ft_texture(t_data *data);
 void	ft_check_file(t_data *data);
+void	ft_destroy(t_data *data, t_component component);
 
 /* VALIDATE_MAP.C */
 
@@ -211,5 +221,6 @@ void	init_visits(t_data *data);
 
 void	set_queue(t_data *data, t_pos *pos);
 void	find_player(t_data *data);
+void	ft_check_malloc_visit(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 12:34:31 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:20:00 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	browse_grille(t_data *data, int deplacements[4][2])
 			|| data->map[data->position.x][data->position.y] == 'E')
 		{
 			if (data->map[data->position.x][data->position.y] == 'C')
-				collec_found = 1;
+				collec_found += 1;
 			if (data->map[data->position.x][data->position.y] == 'E')
 				exit_found = 1;
-			if (collec_found && exit_found)
+			if (collec_found == data->content.count_collectible && exit_found)
 				return (EXIT_SUCCESS);
 		}
 		check_near(data, deplacements);
@@ -92,7 +92,12 @@ void	check_find_collect_exit(t_data *data, int deplacements[4][2])
 {
 	if (find_collect_exit(data, deplacements) == FAIL)
 	{
-		ft_error("Error \n Player can't get exit or collectible");
+		ft_error("Error \nPlayer can't get exit or collectible");
 		ft_clean_map(data);
+		mlx_destroy_display(data->mlx);
+		ft_free_visits(data);
+		ft_free_array(data);
+		free(data->mlx);
+		exit(1);
 	}
 }

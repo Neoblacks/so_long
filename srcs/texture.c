@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 12:22:25 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 12:17:27 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:07:48 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,49 @@ void	ft_texture(t_data *data)
 
 void	ft_check_file(t_data *data)
 {
-	if (data->image.img_collectible == NULL)
-		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT COLLECTIBLE //LEAK
-	if (data->image.img_exit == NULL)
-		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT EXIT //LEAK
-	if (data->image.img_floor == NULL)
-		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT FLOOR //LEAK
-	if (data->image.img_player == NULL)
-		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT PLAYER //LEAK
 	if (data->image.img_wall == NULL)
-		ft_error("FILE NOT FOUND"); //DESTROY ALL IMAGE WITHOUT WALL //LEAK
+	{
+		ft_error("Error\nFile wall.xpm not found");
+		ft_destroy(data, IMG_WALL);
+	}
+	if (data->image.img_player == NULL)
+	{
+		ft_error("Error\nFile player.xpm not found");
+		ft_destroy(data, IMG_PLAYER);
+	}
+	if (data->image.img_exit == NULL)
+	{
+		ft_error("Error\nFile exit.xpm not found");
+		ft_destroy(data, IMG_EXIT);
+	}
+	if (data->image.img_floor == NULL)
+	{
+		ft_error("Error\nFile floor.xpm not found");
+		ft_destroy(data, IMG_FLOOR);
+	}
+	if (data->image.img_collectible == NULL)
+	{
+		ft_error("Error\nFile collect.xpm not found");
+		ft_destroy(data, IMG_COLLECTIBLE);
+	}
+}
+
+void	ft_destroy(t_data *data, t_component component)
+{
+	if (component != IMG_WALL)
+		mlx_destroy_image(data->mlx, data->image.img_wall);
+	if (component != IMG_FLOOR)
+		mlx_destroy_image(data->mlx, data->image.img_floor);
+	if (component != IMG_EXIT)
+		mlx_destroy_image(data->mlx, data->image.img_exit);
+	if (component != IMG_PLAYER)
+		mlx_destroy_image(data->mlx, data->image.img_player);
+	if (component != IMG_COLLECTIBLE)
+		mlx_destroy_image(data->mlx, data->image.img_collectible);
+	ft_clean_map(data);
+	mlx_destroy_display(data->mlx);
+	ft_free_visits(data);
+	ft_free_array(data);
+	free(data->mlx);
+	exit(1);
 }

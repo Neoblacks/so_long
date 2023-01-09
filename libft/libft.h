@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:28:43 by amugnier          #+#    #+#             */
-/*   Updated: 2022/12/12 12:27:04 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:09:01 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stddef.h>
 #include "get_next_line.h"
+#include "ft_printf.h"
 
 typedef struct s_list
 {

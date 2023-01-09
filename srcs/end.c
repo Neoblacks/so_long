@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:49:22 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 15:02:08 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:41:47 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_free_visits(t_data *data)
 	while (data->near.visits[i])
 	{
 		free(data->near.visits[i]);
-		printf("I = %d", i);
 		i++;
 	}
 	free(data->near.visits);
