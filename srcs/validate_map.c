@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 17:20:00 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:28:33 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 bool	is_valid(int x, int y, t_data *data)
 {
 	if (x < 0 || x >= data->height || y < 0 || y >= data->width)
-	{
 		return (false);
-	}
 	if (data->map[x][y] == '1')
 	{
-		return (false);
+			return (false);
 	}
 	return (true);
 }
