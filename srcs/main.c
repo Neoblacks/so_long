@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 12:23:46 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:37:19 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ int	main(int argc, char **argv)
 		map(argv, &(data));
 		data.mlx = mlx_init();
 		if (!data.mlx)
+		{
+			ft_error("Error!\nMlx_init failed\n");
 			return (1);
+		}
 		ft_check_data_map(&data, deplacements);
 	}
 	return (1);
