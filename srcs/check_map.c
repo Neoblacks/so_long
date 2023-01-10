@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:15 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 12:25:51 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:50:01 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	ft_check_format(char **map)
 			width++;
 		if (width != count_width)
 		{
-			ft_error("Error, Map is not a rectangle");
+			ft_error("Error\nMap is not a rectangle");
 			return (FAIL);
 		}
 		width = 0;

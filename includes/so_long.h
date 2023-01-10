@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 18:51:15 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:33:15 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,7 @@ typedef enum e_component
 
 typedef struct s_vars
 {
-	int		win_height;
-	int		win_width;
 	int		i;
-	int		j;
-	int		fd;
-	char	*line;
 }	t_vars;
 
 typedef struct coord_move_s
@@ -121,15 +116,10 @@ typedef struct s_data
 {
 	void			*mlx;
 	void			*win;
-	char			*addr;
-	int				line_length;
-	int				endian;
 	int				count;
 	char			**map;
 	int				width;
 	int				height;
-	int				player_weight;
-	int				exit_weight;
 	t_image			image;
 	t_vars			vars;
 	t_content		content;
@@ -142,6 +132,8 @@ typedef struct s_data
 /*
  * Section 3 : Prototypes of functions
  */
+void	put_text(t_data *data);
+char	*ft_join_strings(char const *s1, char const *s2);
 
 /* GESTION_WINDOW.C */
 int		esc_close(int keycode, t_data *data);
@@ -170,7 +162,7 @@ void	ft_error(char *str);
 
 /* GESTION_MAP.c */
 
-int		count_char_gnl(int fd, char *str);
+int		count_char_gnl(int fd, char **str);
 void	map(char **str, t_data *data);
 char	*ft_addstr(char *str, char buffer);
 char	**ft_parse_map(int fd, t_data *data);

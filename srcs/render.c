@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 14:59:06 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:33:30 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	render_bg(t_data *data)
 		while (data->map[j][i] != '\0')
 		{
 			if (data->map[j][i] == data->content.wall)
+			{
 				display_img(data, data->image.img_wall, i, j);
+				put_text(data);
+			}
 			if (data->map[j][i] == data->content.empty)
 				display_img(data, data->image.img_floor, i, j);
 			i++;

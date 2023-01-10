@@ -6,60 +6,53 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 19:05:13 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:16:03 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-// char	*ft_addstr(char *str, char buffer)
-// {
-// 	int		i;
-// 	char	*ret;
+char	*ft_addstr(char *str, char buffer)
+{
+	int		i;
+	char	*ret;
 
-// 	i = 0;
-// 	if (str == NULL)
-// 		return (NULL);
-// 	ret = malloc(sizeof(char) * (ft_strlen(str) + 2));
-// 	if (!ret)
-// 		return (NULL);
-// 	while (str[i] != '\0')
-// 	{
-// 		ret[i] = str[i];
-// 		i++;
-// 	}
-// 	free(str);
-// 	ret[i] = buffer;
-// 	ret[++i] = '\0';
-// 	return (ret);
-// }
+	i = 0;
+	if (str == NULL)
+		return (NULL);
+	ret = malloc(sizeof(char) * (ft_strlen(str) + 2)); // avoir le + 2 en plus 1
+	if (!ret)
+		return (NULL);
+	while (str[i] != '\0')
+	{
+		ret[i] = str[i];
+		i++;
+	}
+	free(str);
+	ret[i] = buffer;
+	ret[++i] = '\0';
+	return (ret);
+}
 
-// int	count_char_gnl(int fd, char **str)
-// {
-// 	char	buffer;
-// 	int		ret;
+int	count_char_gnl(int fd, char **str)
+{
+	char	buffer;
+	int		ret;
 
-// 	ret = read(fd, buffer, 1);
-// 	ft_printf("buffer = %c", buffer);
-// 	ft_printf("fd = %d", fd);
-// 	ft_printf("ret = %d\n", ret);
-// 	// write(1, "debug", 5);
-// 	while (ret > 0)
-// 	{
-// 		*str = ft_addstr(*str, buffer);
-// 		if (buffer == '\n')
-// 			return (ret);
-// 		else
-// 			ret = ret + 1;
-// 		ret = read(fd, &buffer, 1);
-// 	}
-// 	if (ret == 0)
-// 	{
-// 		free(*str);
-// 		*str = NULL;
-// 	}
-// 	return (ret);
-// }
+	if (*str == NULL)
+		return (0);
+	ret = read(fd, &buffer, 1);
+	while (ret > 0)
+	{
+		*str = ft_addstr(*str, buffer);
+		if (buffer == '\n')
+			return (ret);
+		else
+			ret = ret + 1;
+		ret = read(fd, &buffer, 1);
+	}
+	return (ret);
+}
 
 char	**ft_get_map(int fd)
 {
@@ -95,6 +88,12 @@ char	**ft_parse_map(int fd, t_data *data)
 
 	i = 0;
 	data->map = ft_get_map(fd);
+	if (count_char_gnl(fd, data->map) == 0)
+	{
+		ft_error("Error\nEmpty file\n");
+		free(data->map);
+		exit(1);
+	}
 	ft_check_content(data);
 	if (ft_check_format(data->map) == FAIL)
 		return (ft_clean_map(data));

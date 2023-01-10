@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 12:22:25 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/09 18:07:48 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:47:49 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_content(t_content *content)
 
 void	ft_texture(t_data *data)
 {
-	data->image.img_height = 80;
-	data->image.img_width = 80;
+	data->image.img_height = 32;
+	data->image.img_width = 32;
 	data->image.collectible = "xpm/collect.xpm";
 	data->image.player = "xpm/player.xpm";
 	data->image.exit = "xpm/exit.xpm";
