@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:28:17 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/10 16:34:04 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:27:05 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,14 @@ void	ft_move_all(t_data *data, int dy, int dx)
 	}
 }
 
-
 void	put_text(t_data *data)
 {
 	char	*text;
 	char	*number;
 
 	number = ft_itoa(data->count);
-	text = ft_join_strings("Move: ", number);
+	text = ft_strjoin("Move: ", number);
 	mlx_string_put(data->mlx, data->win, 5, 10, 0x000000, text);
 	free(text);
 	free(number);
-}
-
-char	*ft_join_strings(char const *s1, char const *s2)
-{
-	unsigned int	s1_len;
-	unsigned int	s2_len;
-	unsigned int	i;
-	char			*ptr;
-
-	if (!s1)
-		return (0);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	ptr = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (s1_len-- != 0)
-		ptr[i++] = *s1++;
-	while (s2_len-- != 0)
-		ptr[i++] = *s2++;
-	ptr[i] = '\0';
-	return (ptr);
 }
