@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/10 19:28:33 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:11:46 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ bool	is_valid(int x, int y, t_data *data)
 {
 	if (x < 0 || x >= data->height || y < 0 || y >= data->width)
 		return (false);
-	if (data->map[x][y] == '1')
+	if (data->map[x][y] == '1' || data->map[x][y] == 'E')
 	{
-			return (false);
+		return (false);
 	}
 	return (true);
 }
 
 void	check_near(t_data *data, int deplacements[4][2])
 {
-	int			i;
+	int		i;
 
 	i = 0;
 	while (i < 4)
@@ -60,8 +60,7 @@ int	browse_grille(t_data *data, int deplacements[4][2])
 		{
 			if (data->map[data->position.x][data->position.y] == 'C')
 				collec_found += 1;
-			if (data->map[data->position.x][data->position.y] == 'E')
-				exit_found = 1;
+			exit_found = ft_check_exit(data, deplacements);
 			if (collec_found == data->content.count_collectible && exit_found)
 				return (EXIT_SUCCESS);
 		}
@@ -90,7 +89,7 @@ void	check_find_collect_exit(t_data *data, int deplacements[4][2])
 {
 	if (find_collect_exit(data, deplacements) == FAIL)
 	{
-		ft_error("Error \nPlayer can't get exit or collectible");
+		ft_error("Error\nPlayer can't get exit or collectible");
 		ft_clean_map(data);
 		mlx_destroy_display(data->mlx);
 		ft_free_visits(data);

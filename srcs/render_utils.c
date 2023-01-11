@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/11 19:43:03 by amugnier          #+#    #+#             */
+/*   Updated: 2023/01/11 19:43:19 by amugnier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/so_long.h"
+
+void	render_collec(t_data *data, int i, int j)
+{
+	if (data->counter < 30)
+		display_img(data, data->image.img_collectible_1, i, j);
+	else if (data->counter < 60)
+		display_img(data, data->image.img_collectible_2, i, j);
+	else if (data->counter < 90)
+		display_img(data, data->image.img_collectible_3, i, j);
+	else if (data->counter < 120)
+		display_img(data, data->image.img_collectible_4, i, j);
+}
+
+void	render_player(t_data *data, int i, int j)
+{
+	if (data->counter < 30)
+		display_img(data, data->image.img_player_idle1, i, j);
+	else if (data->counter < 60)
+		display_img(data, data->image.img_player_idle2, i, j);
+	else if (data->counter < 90)
+		display_img(data, data->image.img_player_idle3, i, j);
+	else if (data->counter < 120)
+		display_img(data, data->image.img_player_idle4, i, j);
+}
+
+void	render_exit(t_data *data, int i, int j)
+{
+	if (ft_count_collect(data) == 0)
+		display_img(data, data->image.img_exit_desactivate, i, j);
+	else
+		display_img(data, data->image.img_exit_activate, i, j);
+}

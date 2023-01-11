@@ -13,10 +13,13 @@ PATH_SRCS = srcs
 SRCS = $(PATH_SRCS)/main.c \
 		$(PATH_SRCS)/gestion_window.c \
 		$(PATH_SRCS)/gestion_map.c \
+		$(PATH_SRCS)/gestion_map_utils.c \
 		$(PATH_SRCS)/ft_error.c \
 		$(PATH_SRCS)/texture.c \
+		$(PATH_SRCS)/texture_utils.c \
 		$(PATH_SRCS)/check_map.c \
 		$(PATH_SRCS)/render.c \
+		$(PATH_SRCS)/render_utils.c \
 		$(PATH_SRCS)/move.c \
 		$(PATH_SRCS)/validate_map.c \
 		$(PATH_SRCS)/validate_map_utils.c \

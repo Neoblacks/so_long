@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/10 19:37:19 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:12:41 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_error("Error ! We need 1 argument .ber\n");
+		ft_error("Error\nWe need 1 argument .ber\n");
 		exit(1);
 	}
 	else

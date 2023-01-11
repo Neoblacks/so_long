@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/10 16:33:15 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:08:15 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,17 @@
 typedef enum e_component
 {
 	IMG_WALL,
-	IMG_PLAYER,
-	IMG_COLLECTIBLE,
+	IMG_PLAYER_IDLE1,
+	IMG_PLAYER_IDLE2,
+	IMG_PLAYER_IDLE3,
+	IMG_PLAYER_IDLE4,
+	IMG_COLLECTIBLE_1,
+	IMG_COLLECTIBLE_2,
+	IMG_COLLECTIBLE_3,
+	IMG_COLLECTIBLE_4,
 	IMG_FLOOR,
-	IMG_EXIT,
+	IMG_EXIT_ACTIVATE,
+	IMG_EXIT_DESACTIVATE,
 }	t_component;
 
 /*
@@ -102,14 +109,30 @@ typedef struct image_s
 	int		img_width;
 	void	*img_wall;
 	void	*img_player;
-	void	*img_collectible;
+	void	*img_player_idle1;
+	void	*img_player_idle2;
+	void	*img_player_idle3;
+	void	*img_player_idle4;
+	void	*img_collectible_1;
+	void	*img_collectible_2;
+	void	*img_collectible_3;
+	void	*img_collectible_4;
 	void	*img_floor;
-	void	*img_exit;
+	void	*img_exit_activate;
+	void	*img_exit_desactivate;
 	char	*player;
+	char	*player_idle1;
+	char	*player_idle2;
+	char	*player_idle3;
+	char	*player_idle4;
 	char	*floor;
 	char	*wall;
-	char	*collectible;
-	char	*exit;
+	char	*collectible_1;
+	char	*collectible_2;
+	char	*collectible_3;
+	char	*collectible_4;
+	char	*exit_activate;
+	char	*exit_desactivate;
 }	t_image;
 
 typedef struct s_data
@@ -120,6 +143,9 @@ typedef struct s_data
 	char			**map;
 	int				width;
 	int				height;
+	int				counter;
+	int				anim;
+	int				anim_2;
 	t_image			image;
 	t_vars			vars;
 	t_content		content;
@@ -133,7 +159,6 @@ typedef struct s_data
  * Section 3 : Prototypes of functions
  */
 void	put_text(t_data *data);
-char	*ft_join_strings(char const *s1, char const *s2);
 
 /* GESTION_WINDOW.C */
 int		esc_close(int keycode, t_data *data);
@@ -150,9 +175,9 @@ void	ft_check_content(t_data *data);
 
 /* END.C + END_UTILS.c */
 
-void	ft_stop(t_data *data, bool code);
 int		ft_urgency(t_data *data);
 int		ft_critical(t_data *data);
+void	ft_stop(t_data *data, bool code);
 void	ft_free_array(t_data *data);
 void	ft_free_visits(t_data *data);
 void	*ft_clean_map(t_data *data);
@@ -167,6 +192,8 @@ void	map(char **str, t_data *data);
 char	*ft_addstr(char *str, char buffer);
 char	**ft_parse_map(int fd, t_data *data);
 char	**ft_get_map(int fd);
+void	ft_check_map(int fd, t_data *data);
+void	ft_check_nb_symbols(t_data *data);
 
 /* MAIN.C */
 
@@ -185,6 +212,9 @@ void	render_bg(t_data *data);
 void	render_other(t_data *data);
 void	window_utils(t_data *data);
 void	display_img(t_data *data, void *img, int x, int y);
+void	render_collec(t_data *data, int i, int j);
+void	render_exit(t_data *data, int i, int j);
+void	render_player(t_data *data, int i, int j);
 
 /* TEXTURE.C */
 
@@ -192,6 +222,12 @@ void	ft_content(t_content *content);
 void	ft_texture(t_data *data);
 void	ft_check_file(t_data *data);
 void	ft_destroy(t_data *data, t_component component);
+void	ft_check_collectible(t_data *data);
+void	ft_check_player(t_data *data);
+void	ft_choose_img(t_data *data, t_component component);
+void	ft_texture_player(t_data *data);
+void	ft_texture_collec(t_data *data);
+
 
 /* VALIDATE_MAP.C */
 
@@ -214,5 +250,6 @@ void	init_visits(t_data *data);
 void	set_queue(t_data *data, t_pos *pos);
 void	find_player(t_data *data);
 void	ft_check_malloc_visit(t_data *data);
+int		ft_check_exit(t_data *data, int deplacements[4][2]);
 
 #endif

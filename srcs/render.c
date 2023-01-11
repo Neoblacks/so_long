@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/10 16:33:30 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:43:17 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	render_other(t_data *data)
 	int	i;
 	int	j;
 
+	data->counter = (data->counter + 1) % 120;
 	j = 0;
 	while (data->map[j])
 	{
@@ -48,15 +49,15 @@ void	render_other(t_data *data)
 		while (data->map[j][i] != '\0')
 		{
 			if (data->map[j][i] == data->content.collectible)
-				display_img(data, data->image.img_collectible, i, j);
+				render_collec(data, i, j);
 			if (data->map[j][i] == data->content.player)
 			{
 				data->coord_move.x = i * data->image.img_width;
 				data->coord_move.y = j * data->image.img_height;
-				display_img(data, data->image.img_player, i, j);
+				render_player(data, i, j);
 			}
 			if (data->map[j][i] == data->content.exit)
-				display_img(data, data->image.img_exit, i, j);
+				render_exit(data, i, j);
 			i++;
 		}
 		j++;
@@ -81,6 +82,9 @@ void	window_utils(t_data *data)
 		ft_stop(data, FAIL);
 		return ;
 	}
+	data->counter = 0;
+	data->anim = 0;
+	data->anim_2 = 0;
 	mlx_loop_hook(data->mlx, &render_main, data);
 	mlx_hook(data->win, 2, 1L << 0, move_key, data);
 	mlx_hook(data->win, 17, 1L << 17, cross_close, data);

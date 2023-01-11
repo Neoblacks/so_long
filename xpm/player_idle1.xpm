@@ -1,5 +1,5 @@
 /* XPM */
-static char *_06719a74a864f1ee27f6b625cad1850JUI3U40Zkn98vwMx[] = {
+static char *result[] = {
 /* columns rows colors chars-per-pixel */
 "32 32 18 1 ",
 "  c black",
@@ -21,8 +21,8 @@ static char *_06719a74a864f1ee27f6b625cad1850JUI3U40Zkn98vwMx[] = {
 "> c #FFDBA5",
 ", c #CCE2E1",
 /* pixels */
-"XXXXXXXXX        XooXXXXOOoooXXX",
-"oXXXOXoX %%%::%% oooOXoOOoooXXXO",
+"XXXXXXXXX     XOXXooXXXXOOoooXXX",
+"oXXXOXoX %%%::   oooOXoOOoooXXXO",
 "XoXOXXo %%%:::%%% ooooooOoooXXOX",
 "OOOXooo   %::%>%% oOoooOooooOXoo",
 "XXOXoXoo %%%%%>>$$ oOOOOoooOXoOo",
@@ -38,8 +38,8 @@ static char *_06719a74a864f1ee27f6b625cad1850JUI3U40Zkn98vwMx[] = {
 "&OOoOo ;;; ++,,;;, OOo&XXXOXoXoo",
 "oOOOOO ;;  ++++,,+ OO&XoXoOooooX",
 "oOOOo& ;; o ++++++ o&OoooOooooXo",
-"ooOXX& @@ o ++++++# oooooOO&&ooo",
-"oooXX @@@ o ++++++# OooOoOXXooOo",
+"ooOXX& ;; o ++++++# oooooOO&&ooo",
+"oooXX @@; o ++++++# OooOoOXXooOo",
 "ooXoX >> oo ++++++- oooOOXXoOooO",
 "oXXXo >> o ===@@##- OoooOXoXOooo",
 "ooXoX   oo ===  ##  Oo&OOoXXoooo",
