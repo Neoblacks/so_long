@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/11 20:08:15 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:53:24 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,8 @@ typedef struct s_data
 	int				counter;
 	int				anim;
 	int				anim_2;
+	int				exit_found;
+	int				collect_found;
 	t_image			image;
 	t_vars			vars;
 	t_content		content;
@@ -227,7 +229,6 @@ void	ft_check_player(t_data *data);
 void	ft_choose_img(t_data *data, t_component component);
 void	ft_texture_player(t_data *data);
 void	ft_texture_collec(t_data *data);
-
 
 /* VALIDATE_MAP.C */
 

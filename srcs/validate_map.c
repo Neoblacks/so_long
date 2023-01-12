@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/11 20:11:46 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:03:55 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,21 @@ void	check_near(t_data *data, int deplacements[4][2])
 
 int	browse_grille(t_data *data, int deplacements[4][2])
 {
-	int		collec_found;
-	int		exit_found;
-
-	collec_found = 0;
-	exit_found = 0;
 	while (data->queue.debut < data->queue.fin)
 	{
 		data->position = data->queue.array[data->queue.debut];
 		data->queue.debut++;
 		if (data->map[data->position.x][data->position.y] == 'C' \
-			|| data->map[data->position.x][data->position.y] == 'E')
+			|| data->map[data->position.x][data->position.y] == '0' \
+			|| data->map[data->position.x][data->position.y] == 'P')
 		{
 			if (data->map[data->position.x][data->position.y] == 'C')
-				collec_found += 1;
-			exit_found = ft_check_exit(data, deplacements);
-			if (collec_found == data->content.count_collectible && exit_found)
+			{
+				data->collect_found += 1;
+			}
+			data->exit_found = ft_check_exit(data, deplacements);
+			if (data->collect_found == \
+				data->content.count_collectible && data->exit_found == 1)
 				return (EXIT_SUCCESS);
 		}
 		check_near(data, deplacements);
@@ -81,6 +80,8 @@ int	find_collect_exit(t_data *data, int deplacements[4][2])
 		data->position.x, data->position.y);
 	init_visits(data);
 	data->near.visits[data->position.x][data->position.y] = true;
+	data->collect_found = 0;
+	data->exit_found = 0;
 	result = browse_grille(data, deplacements);
 	return (result);
 }

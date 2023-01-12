@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:41:46 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/11 19:58:22 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:54:38 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,15 @@ void	ft_check_malloc_visit(t_data *data)
 
 int	ft_check_exit(t_data *data, int deplacements[4][2])
 {
-	int	exit_found;
 	int	i;
 
 	i = 0;
-	exit_found = 0;
 	while (i < 4)
 	{
 		if (data->map[data->position.x + deplacements[i][0]] \
-			[data->position.y + deplacements[i][1]] == '0' \
-			|| data->map[data->position.x + deplacements[i][0]] \
-			[data->position.y + deplacements[i][1]] == 'C' \
-			|| data->map[data->position.x + deplacements[i][0]] \
-			[data->position.y + deplacements[i][1]] == 'P')
-			exit_found = 1;
+			[data->position.y + deplacements[i][1]] == 'E')
+			data->exit_found = 1;
 		i++;
 	}
-	return (exit_found);
+	return (data->exit_found);
 }
