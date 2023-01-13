@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/13 19:03:43 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/13 20:41:33 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define O_KEY 111
 # define SUCCESS 0
 # define FAIL 1
+// # define malloc (...) NULL
 
 typedef enum e_component
 {

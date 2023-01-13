@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/12 17:09:39 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/13 23:27:41 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,22 @@ char	*ft_addstr(char *str, char buffer)
 
 int	count_char_gnl(int fd, char **str)
 {
-	char	buffer;
+	char	buffer[1];
 	int		ret;
 
+	printf("str %s\n", str[1]);
 	if (*str == NULL)
 		return (0);
-	ret = read(fd, &buffer, 1);
+	ret = read(fd, buffer, sizeof(char));
+	printf("ret %d\n", ret);
 	while (ret > 0)
 	{
-		*str = ft_addstr(*str, buffer);
-		if (buffer == '\n')
+		*str = ft_addstr(*str, buffer[0]);
+		if (buffer[0] == '\n')
 			return (ret);
 		else
 			ret = ret + 1;
-		ret = read(fd, &buffer, 1);
+		ret = read(fd, buffer, 1);
 	}
 	return (ret);
 }
@@ -88,7 +90,12 @@ char	**ft_parse_map(int fd, t_data *data)
 
 	i = 0;
 	data->map = ft_get_map(fd);
-	ft_check_map(fd, data);
+	while (data->map[i] != NULL)
+	{
+		printf("map[%d] = %s\n", i, data->map[i]);
+		i++;
+	}
+	// ft_check_map(fd, data);
 	ft_check_content(data);
 	if (ft_check_format(data->map) == FAIL)
 		return (ft_clean_map(data));
@@ -110,9 +117,13 @@ char	**ft_parse_map(int fd, t_data *data)
 
 void	map(char **str, t_data *data)
 {
-	int	fd;
+	int		fd;
+	char	buffer[2];
+	int		ret;
 
 	fd = 0;
+	ret = 0;
+	printf("path --> %s\n", str[1]);
 	data->map = NULL;
 	if (ft_strstr(str[1], ".ber") == FAIL)
 	{
@@ -123,7 +134,16 @@ void	map(char **str, t_data *data)
 	{
 		fd = open(str[1], O_RDONLY);
 		if (fd > 0)
+		{
+			ret = read(fd, buffer, sizeof(char));/* FIXME WTF ???? */
+			// ret = read(fd, buffer, sizeof(char));
+			// if (ret == 0)
+			// {
+			// 	ft_error("Error\nEmpty file\n");
+			// 	exit(1);
+			// }
 			data->map = ft_parse_map(fd, data);
+		}
 		else
 		{
 			ft_error("Error\nFailed to open file\n");
