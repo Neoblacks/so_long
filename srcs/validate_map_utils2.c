@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:41:46 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/12 16:54:38 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/13 18:53:36 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	find_player(t_data *data)
 			{
 				data->position.x = i;
 				data->position.y = j;
+				// printf("x: %d, y: %d, C: P\n", data->position.x, data->position.y);
 			}
 			j++;
 		}

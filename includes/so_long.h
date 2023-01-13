@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/12 16:53:24 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:03:43 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,9 @@ typedef struct s_data
 {
 	void			*mlx;
 	void			*win;
-	int				count;
 	char			**map;
+	int				fd3;
+	int				count;
 	int				width;
 	int				height;
 	int				counter;
