@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/13 20:22:32 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:32:04 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	check_near(t_data *data, int deplacements[4][2])
 	int		i;
 
 	i = 0;
-	data->fd3 = open("~/Documents/pythonBFS/pos.txt", O_RDWR | O_CREAT | O_APPEND, 0644);
+	data->fd3 = open("~/Documents/pythonBFS/pos.txt", \
+		O_RDWR | O_CREAT | O_APPEND, 0644);
 	while (i < 4)
 	{
 		data->near.x_near = data->position.x + deplacements[i][0];

@@ -6,21 +6,11 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:59:37 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/13 21:58:20 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:23:35 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-void	ft_check_map(int fd, t_data *data)
-{
-	if (count_char_gnl(fd, data->map) == 0)
-	{
-		ft_error("Error\nEmpty file\n");
-		free(data->map);
-		exit(1);
-	}
-}
 
 void	ft_check_nb_symbols(t_data *data)
 {
@@ -30,6 +20,26 @@ void	ft_check_nb_symbols(t_data *data)
 	{
 		ft_clean_map(data);
 		ft_error("Error\nNeed 1 P, 1 Exit, and 1 Co");
+		exit(1);
+	}
+}
+
+void	ft_check_file_empty(int fd)
+{
+	char	buffer[1];
+	int		ret;
+
+	ret = read(fd, buffer, 1);
+	if (ret == 0)
+	{
+		ft_error("Error\nEmpty file\n");
+		close(fd);
+		exit(1);
+	}
+	else if (ret == -1)
+	{
+		ft_error("Error\nto open file\n");
+		close(fd);
 		exit(1);
 	}
 }

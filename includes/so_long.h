@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/13 20:41:33 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:57:30 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 # define O_KEY 111
 # define SUCCESS 0
 # define FAIL 1
-// # define malloc (...) NULL
 
 typedef enum e_component
 {
@@ -191,13 +190,14 @@ void	ft_error(char *str);
 
 /* GESTION_MAP.c */
 
-int		count_char_gnl(int fd, char **str);
-void	map(char **str, t_data *data);
-char	*ft_addstr(char *str, char buffer);
 char	**ft_parse_map(int fd, t_data *data);
 char	**ft_get_map(int fd);
+void	map(char **str, t_data *data);
 void	ft_check_map(int fd, t_data *data);
 void	ft_check_nb_symbols(t_data *data);
+void	ft_open_file(char **str);
+void	ft_check_file_empty(int fd);
+void	ft_start_map(char **str, t_data *data);
 
 /* MAIN.C */
 

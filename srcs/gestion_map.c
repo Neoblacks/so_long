@@ -6,55 +6,11 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/13 23:27:41 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:29:44 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-char	*ft_addstr(char *str, char buffer)
-{
-	int		i;
-	char	*ret;
-
-	i = 0;
-	if (str == NULL)
-		return (NULL);
-	ret = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	if (!ret)
-		return (NULL);
-	while (str[i] != '\0')
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	free(str);
-	ret[i] = buffer;
-	ret[++i] = '\0';
-	return (ret);
-}
-
-int	count_char_gnl(int fd, char **str)
-{
-	char	buffer[1];
-	int		ret;
-
-	printf("str %s\n", str[1]);
-	if (*str == NULL)
-		return (0);
-	ret = read(fd, buffer, sizeof(char));
-	printf("ret %d\n", ret);
-	while (ret > 0)
-	{
-		*str = ft_addstr(*str, buffer[0]);
-		if (buffer[0] == '\n')
-			return (ret);
-		else
-			ret = ret + 1;
-		ret = read(fd, buffer, 1);
-	}
-	return (ret);
-}
 
 char	**ft_get_map(int fd)
 {
@@ -90,12 +46,6 @@ char	**ft_parse_map(int fd, t_data *data)
 
 	i = 0;
 	data->map = ft_get_map(fd);
-	while (data->map[i] != NULL)
-	{
-		printf("map[%d] = %s\n", i, data->map[i]);
-		i++;
-	}
-	// ft_check_map(fd, data);
 	ft_check_content(data);
 	if (ft_check_format(data->map) == FAIL)
 		return (ft_clean_map(data));
@@ -115,15 +65,47 @@ char	**ft_parse_map(int fd, t_data *data)
 	return (data->map);
 }
 
-void	map(char **str, t_data *data)
+void	ft_open_file(char **str)
 {
 	int		fd;
-	char	buffer[2];
+
+	fd = open(str[1], O_RDONLY);
+	if (fd > 0)
+	{
+		ft_check_file_empty(fd);
+		close(fd);
+	}
+	else
+	{
+		ft_error("Error\nFailed to open file\n");
+		close(fd);
+		exit(1);
+	}
+}
+
+void	ft_start_map(char **str, t_data *data)
+{
+	int	fd;
+
+	fd = open(str[1], O_RDONLY);
+	if (fd > 0)
+	{
+		data->map = ft_parse_map(fd, data);
+		close(fd);
+	}
+	else
+	{
+		ft_error("Error\nFailed to open file\n");
+		close(fd);
+		exit(1);
+	}
+}
+
+void	map(char **str, t_data *data)
+{
 	int		ret;
 
-	fd = 0;
 	ret = 0;
-	printf("path --> %s\n", str[1]);
 	data->map = NULL;
 	if (ft_strstr(str[1], ".ber") == FAIL)
 	{
@@ -132,23 +114,8 @@ void	map(char **str, t_data *data)
 	}
 	else
 	{
-		fd = open(str[1], O_RDONLY);
-		if (fd > 0)
-		{
-			ret = read(fd, buffer, sizeof(char));/* FIXME WTF ???? */
-			// ret = read(fd, buffer, sizeof(char));
-			// if (ret == 0)
-			// {
-			// 	ft_error("Error\nEmpty file\n");
-			// 	exit(1);
-			// }
-			data->map = ft_parse_map(fd, data);
-		}
-		else
-		{
-			ft_error("Error\nFailed to open file\n");
-			exit(1);
-		}
+		ft_open_file(str);
+		ft_start_map(str, data);
 		ft_check_nb_symbols(data);
 	}
 }
