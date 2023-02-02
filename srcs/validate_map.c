@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/14 13:32:04 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:52:23 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,18 @@ bool	is_valid(int x, int y, t_data *data)
 	return (true);
 }
 
+/* This function is part of the browse grid function. It checks around
+	the tile we are on */
+
 void	check_near(t_data *data, int deplacements[4][2])
 {
 	int		i;
 
 	i = 0;
-	data->fd3 = open("~/Documents/pythonBFS/pos.txt", \
-		O_RDWR | O_CREAT | O_APPEND, 0644);
 	while (i < 4)
 	{
 		data->near.x_near = data->position.x + deplacements[i][0];
 		data->near.y_near = data->position.y + deplacements[i][1];
-		ft_dprintf(data->fd3, "x: %d, y: %d, C: %c\n", data->near.y_near, \
-			data->near.x_near, data->map[data->near.x_near][data->near.y_near]);
 		if (is_valid(data->near.x_near, data->near.y_near, data) && \
 			!data->near.visits[data->near.x_near][data->near.y_near])
 		{
@@ -48,7 +47,11 @@ void	check_near(t_data *data, int deplacements[4][2])
 	}
 }
 
-int	browse_grille(t_data *data, int deplacements[4][2])
+/* This function is a BFS algo, we start at the player's position and look at
+	the tiles around him and put all the tiles that we can go to in a queue.
+	We then go to the first tiles in the list and do the same operation again */
+
+int	browse_grid(t_data *data, int deplacements[4][2])
 {
 	while (data->queue.debut < data->queue.fin)
 	{
@@ -72,6 +75,9 @@ int	browse_grille(t_data *data, int deplacements[4][2])
 	return (FAIL);
 }
 
+/* This function calls all initialisation functions to do a BFS algo
+	and calls function browse_grid */
+
 int	find_collect_exit(t_data *data, int deplacements[4][2])
 {
 	int	result;
@@ -86,7 +92,7 @@ int	find_collect_exit(t_data *data, int deplacements[4][2])
 	data->near.visits[data->position.x][data->position.y] = true;
 	data->collect_found = 0;
 	data->exit_found = 0;
-	result = browse_grille(data, deplacements);
+	result = browse_grid(data, deplacements);
 	return (result);
 }
 
@@ -94,7 +100,7 @@ void	check_find_collect_exit(t_data *data, int deplacements[4][2])
 {
 	if (find_collect_exit(data, deplacements) == FAIL)
 	{
-		ft_error("Error\nPlayer can't get exit or collectible");
+		ft_error("Error\nPlayer can't get exit or all collectible\n");
 		ft_clean_map(data);
 		mlx_destroy_display(data->mlx);
 		ft_free_visits(data);

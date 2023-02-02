@@ -6,11 +6,13 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:15 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/11 20:13:06 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:23:23 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* Checks if first and last columns are closed */
 
 int	ft_check_column(char *map_line, char wall, t_data *data)
 {
@@ -28,6 +30,8 @@ int	ft_check_column(char *map_line, char wall, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+/* Checks if first and last lines are closed */
+
 int	ft_check_line(char *map_line, char wall)
 {
 	int	i;
@@ -44,6 +48,8 @@ int	ft_check_line(char *map_line, char wall)
 	}
 	return (EXIT_SUCCESS);
 }
+
+/* Checks if we don't have another symbol inside map file */
 
 int	ft_check_other(char *map_line, t_content *content)
 {
@@ -69,6 +75,9 @@ int	ft_check_other(char *map_line, t_content *content)
 	return (EXIT_SUCCESS);
 }
 
+/* Checks if there is only one exit and one player and
+	checks if there is at least one collectible */
+
 void	ft_check_content(t_data *data)
 {
 	int	i;
@@ -93,6 +102,8 @@ void	ft_check_content(t_data *data)
 	}
 }
 
+/* Checks if map is a rectangle */
+
 int	ft_check_format(char **map)
 {
 	int	width;
@@ -102,6 +113,8 @@ int	ft_check_format(char **map)
 	width = 0;
 	height = 0;
 	count_width = 0;
+	if (map[0] == NULL)
+		return (ft_error("Error\nMap is empty\n"), FAIL);
 	while (map[0][count_width] != '\0')
 		count_width++;
 	while (map[height] != NULL)
@@ -110,7 +123,7 @@ int	ft_check_format(char **map)
 			width++;
 		if (width != count_width)
 		{
-			ft_error("Error\nMap is not a rectangle");
+			ft_error("Error\nMap is not a rectangle\n");
 			return (FAIL);
 		}
 		width = 0;

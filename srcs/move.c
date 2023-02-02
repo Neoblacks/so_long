@@ -6,11 +6,14 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:28:17 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/10 19:16:52 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:41:59 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* Function to move a player. I use dy and dx which is equal to 1 / -1 / or 0
+depending on the direction I want to move. */
 
 void	ft_move_all(t_data *data, int dy, int dx)
 {
@@ -41,6 +44,8 @@ void	ft_move_all(t_data *data, int dy, int dx)
 	}
 }
 
+/* Function to display the number of movements on the Window */
+
 void	put_text(t_data *data)
 {
 	char	*text;
@@ -48,7 +53,8 @@ void	put_text(t_data *data)
 
 	number = ft_itoa(data->count);
 	text = ft_strjoin("Move: ", number);
-	mlx_string_put(data->mlx, data->win, 5, 10, 0x55ff33, text);
+	mlx_set_font(data->mlx, data->win, "9x15bold");
+	mlx_string_put(data->mlx, data->win, 5, 20, 0xffffff, text);
 	free(text);
 	free(number);
 }

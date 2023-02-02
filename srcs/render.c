@@ -6,11 +6,16 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/11 19:43:17 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:56:48 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/*
+This function is used to render the background of the map.
+It's called by render_main. and it's a loop called by mlx_loop_hook.
+ */
 
 void	render_bg(t_data *data)
 {
@@ -35,6 +40,15 @@ void	render_bg(t_data *data)
 		j++;
 	}
 }
+
+/*
+This function is used to render the collectibles, the player and the exit.
+it's called by render_main which is a loop called by mlx_loop_hook.
+We have to use a counter to make the animation of the player. The counter is
+incremented by 1 each time the function is called. When the counter is equal to
+120, it's reset to 0. The counter is used to know which image of the player we
+have to display.
+ */
 
 void	render_other(t_data *data)
 {
@@ -64,12 +78,23 @@ void	render_other(t_data *data)
 	}
 }
 
+/*
+This function calls the two functions above and is called by mlx_loop_hook
+ */
+
 int	render_main(t_data *data)
 {
 	render_bg(data);
 	render_other(data);
 	return (0);
 }
+
+/*
+This function is used to create the window and to call the functions above.
+If the window is not created, it will stop the program and display an error.
+If the window is created, it will call the functions above. And init the
+variables used in the functions above.
+ */
 
 void	window_utils(t_data *data)
 {
@@ -78,13 +103,12 @@ void	window_utils(t_data *data)
 		(data->height * data->image.img_height), "So long");
 	if (data->win == NULL)
 	{
-		ft_error("Error\nWindow not created");
+		ft_error("Error\nWindow not created\n");
 		ft_stop(data, FAIL);
 		return ;
 	}
 	data->counter = 0;
 	data->anim = 0;
-	data->anim_2 = 0;
 	mlx_loop_hook(data->mlx, &render_main, data);
 	mlx_hook(data->win, 2, 1L << 0, move_key, data);
 	mlx_hook(data->win, 17, 1L << 17, cross_close, data);
@@ -92,6 +116,11 @@ void	window_utils(t_data *data)
 	mlx_loop(data->mlx);
 	ft_stop(data, SUCCESS);
 }
+
+/*
+This function is used to display the images on the window.
+It's called by render_bg and render_other.
+ */
 
 void	display_img(t_data *data, void *img, int x, int y)
 {

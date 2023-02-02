@@ -6,11 +6,14 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/14 13:29:44 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:09:55 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* Gets all the map from file and puts this inside a variable
+	to use it on parsing, BFS algo */
 
 char	**ft_get_map(int fd)
 {
@@ -40,12 +43,16 @@ char	**ft_get_map(int fd)
 	return (map_final);
 }
 
+/* Function to parse the map to check if this map file is correct */
+
 char	**ft_parse_map(int fd, t_data *data)
 {
 	int	i;
 
 	i = 0;
 	data->map = ft_get_map(fd);
+	// if (data->map == NULL)
+	// 	(ft_error_exit("Error\nFailed to read file\n"));
 	ft_check_content(data);
 	if (ft_check_format(data->map) == FAIL)
 		return (ft_clean_map(data));
@@ -101,11 +108,11 @@ void	ft_start_map(char **str, t_data *data)
 	}
 }
 
+/* Function to call other functions and tests if the file format
+	of the map is good (.ber) */
+
 void	map(char **str, t_data *data)
 {
-	int		ret;
-
-	ret = 0;
 	data->map = NULL;
 	if (ft_strstr(str[1], ".ber") == FAIL)
 	{

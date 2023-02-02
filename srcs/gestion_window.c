@@ -6,27 +6,30 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:25:58 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/11 17:42:14 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:29:41 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-//Close window with ESC
+/* Closes window with Escape key */
+
 int	esc_close(int keycode, t_data *data)
 {
 	if (keycode == ESC_KEY)
-	{
 		ft_stop(data, SUCCESS);
-	}
 	return (0);
 }
+
+/* Closes window with red cross */
 
 int	cross_close(t_data *data)
 {
 	ft_stop(data, SUCCESS);
 	return (0);
 }
+
+/* Moves player with W, A, S, D keys and directionnal Arrows */
 
 int	move_key(int keycode, t_data *data)
 {

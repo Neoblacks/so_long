@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/14 13:57:30 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:40:26 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ typedef struct s_data
 	int				height;
 	int				counter;
 	int				anim;
-	int				anim_2;
 	int				exit_found;
 	int				collect_found;
 	t_image			image;
@@ -187,6 +186,7 @@ void	*ft_clean_map(t_data *data);
 void	ft_destroy_img(t_data *data);
 
 void	ft_error(char *str);
+void	ft_error_exit(char *str);
 
 /* GESTION_MAP.c */
 
@@ -234,7 +234,7 @@ void	ft_texture_collec(t_data *data);
 
 /* VALIDATE_MAP.C */
 
-int		browse_grille(t_data *data, int deplacements[4][2]);
+int		browse_grid(t_data *data, int deplacements[4][2]);
 int		find_collect_exit(t_data *data, int deplacements[4][2]);
 bool	is_valid(int x, int y, t_data *data);
 void	check_find_collect_exit(t_data *data, int deplacements[4][2]);

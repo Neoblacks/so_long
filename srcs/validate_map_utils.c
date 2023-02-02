@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/12 12:18:24 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/01/30 14:01:09 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	alloc_array(t_data *data)
 	data->queue.array = malloc(sizeof(t_pos) * data->height * data->width);
 	if (data->queue.array == NULL)
 	{
-		ft_error("Error\nMalloc failed");
+		ft_error("Error\nMalloc failed\n");
 		ft_clean_map(data);
 		mlx_destroy_display(data->mlx);
 		ft_free_array(data);
@@ -64,7 +64,7 @@ void	alloc_visits(t_data *data)
 	data->near.visits = malloc(sizeof(bool *) * (data->height + 1));
 	if (data->near.visits == NULL)
 	{
-		ft_error("Error\nMalloc failed");
+		ft_error("Error\nMalloc failed\n");
 		ft_check_malloc_visit(data);
 		exit(1);
 	}
@@ -73,7 +73,7 @@ void	alloc_visits(t_data *data)
 		data->near.visits[i] = malloc(sizeof(bool) * (data->width));
 		if (data->near.visits[i] == NULL)
 		{
-			ft_error("Error\nMalloc failed");
+			ft_error("Error\nMalloc failed\n");
 			ft_check_malloc_visit(data);
 			ft_free_visits(data);
 			free(data->mlx);

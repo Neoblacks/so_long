@@ -6,11 +6,13 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:50:59 by amugnier          #+#    #+#             */
-/*   Updated: 2023/01/14 13:28:40 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/02 13:36:54 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* Puts data of map inside a variable to prepare a comparison for Parsing */
 
 void	ft_content(t_content *content)
 {
@@ -23,6 +25,9 @@ void	ft_content(t_content *content)
 	content->count_exit = 0;
 	content->count_collectible = 0;
 }
+
+/* Puts xpm file inside variable and puts this data inside
+	mlx_xpm_file_to_image to convert this to pointer */
 
 void	ft_texture(t_data *data)
 {
