@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 12:28:17 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/01 14:41:59 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:48:31 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	ft_move_all(t_data *data, int dy, int dx)
 				data->count++;
 				ft_printf("count : %d\n", data->count);
 				ft_printf("GG vous avez gagne en %d coups\n", data->count);
-				ft_stop(data, SUCCESS);
+				if (data->nb_map == 10)
+					ft_stop(data, SUCCESS);
+				else
+					ft_stop(data, NEXT);
 			}
 		}
 	}

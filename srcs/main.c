@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:26:12 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/01 14:17:06 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:46:43 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,28 +89,58 @@ This function is the main function. It start by checking if we have 2 args
 (executable, and map). If the mlx init fails it returns an error to
 protect a segfault, and calls ft_check_data_map */
 
+// int	main(int argc, char **argv)
+// {
+// 	t_data	data;
+// 	int		deplacements[4][2];
+
+// 	if (argc != 1)
+// 	{
+// 		ft_error("Error\nWe don't need to put a map\n");
+// 		exit(1);
+// 	}
+// 	else
+// 	{
+// 		data.count = 0;
+// 		ft_content(&(data.content));
+// 		map(argv, &(data));
+// 		data.mlx = mlx_init();
+// 		if (!data.mlx)
+// 		{
+// 			ft_error("Error!\nMlx_init failed\n");
+// 			exit(1);
+// 		}
+// 		ft_check_data_map(&data, deplacements);
+// 	}
+// 	return (0);
+// }
+
 int	main(int argc, char **argv)
 {
-	t_data	data;
-	int		deplacements[4][2];
+	t_data data;
+	int deplacement[4][2];
+	char	*first_map;
+	(void)argv;
 
-	if (argc != 2)
+	if (argc != 1)
 	{
-		ft_error("Error\nWe need 1 argument .ber\n");
+		ft_error("Error\nWe don't need to put a map\n");
 		exit(1);
 	}
 	else
 	{
+		data.nb_map = 1;
 		data.count = 0;
 		ft_content(&(data.content));
-		map(argv, &(data));
+		first_map = "map/map_level1.ber";
+		map(first_map, &(data));
 		data.mlx = mlx_init();
 		if (!data.mlx)
 		{
 			ft_error("Error!\nMlx_init failed\n");
 			exit(1);
 		}
-		ft_check_data_map(&data, deplacements);
+		ft_check_data_map(&data, deplacement);
 	}
 	return (0);
 }

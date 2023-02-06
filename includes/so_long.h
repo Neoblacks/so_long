@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/01 12:40:26 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:19:15 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define O_KEY 111
 # define SUCCESS 0
 # define FAIL 1
+# define NEXT 2
 
 typedef enum e_component
 {
@@ -148,6 +149,7 @@ typedef struct s_data
 	int				anim;
 	int				exit_found;
 	int				collect_found;
+	unsigned int	nb_map;
 	t_image			image;
 	t_vars			vars;
 	t_content		content;
@@ -179,7 +181,7 @@ void	ft_check_content(t_data *data);
 
 int		ft_urgency(t_data *data);
 int		ft_critical(t_data *data);
-void	ft_stop(t_data *data, bool code);
+void	ft_stop(t_data *data, int code);
 void	ft_free_array(t_data *data);
 void	ft_free_visits(t_data *data);
 void	*ft_clean_map(t_data *data);
@@ -192,12 +194,12 @@ void	ft_error_exit(char *str);
 
 char	**ft_parse_map(int fd, t_data *data);
 char	**ft_get_map(int fd);
-void	map(char **str, t_data *data);
+void	map(char *str, t_data *data);
 void	ft_check_map(int fd, t_data *data);
 void	ft_check_nb_symbols(t_data *data);
-void	ft_open_file(char **str);
+void	ft_open_file(char *str);
 void	ft_check_file_empty(int fd);
-void	ft_start_map(char **str, t_data *data);
+void	ft_start_map(char *str, t_data *data);
 
 /* MAIN.C */
 
@@ -208,6 +210,8 @@ void	ft_check_data_map(t_data *data, int deplacements[4][2]);
 /* MOVE.C */
 
 void	ft_move_all(t_data *data, int dy, int dx);
+
+void	ft_next_map(t_data *data);
 
 /* RENDER.C */
 

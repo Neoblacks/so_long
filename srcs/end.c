@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:49:22 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/01 14:59:43 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:17:22 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_free_array(t_data *data)
 	free(data->queue.array);
 }
 
-void	ft_stop(t_data *data, bool code)
+void	ft_stop(t_data *data, int code)
 {
 	int	i;
 
@@ -55,7 +55,9 @@ void	ft_stop(t_data *data, bool code)
 	free(data->mlx);
 	if (code == SUCCESS)
 		exit(0);
-	else
+	else if (code == NEXT)
+		ft_next_map(data);
+	else if (code == FAIL)
 		exit(1);
 }
 
