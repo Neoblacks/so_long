@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:23:31 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/01 16:09:55 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:20:45 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ char	**ft_parse_map(int fd, t_data *data)
 	return (data->map);
 }
 
-void	ft_open_file(char **str)
+void	ft_open_file(char *str)
 {
 	int		fd;
 
-	fd = open(str[1], O_RDONLY);
+	fd = open(str, O_RDONLY);
 	if (fd > 0)
 	{
 		ft_check_file_empty(fd);
@@ -84,17 +84,18 @@ void	ft_open_file(char **str)
 	}
 	else
 	{
+		printf("%s\n", str);
 		ft_error("Error\nFailed to open file\n");
 		close(fd);
 		exit(1);
 	}
 }
 
-void	ft_start_map(char **str, t_data *data)
+void	ft_start_map(char *str, t_data *data)
 {
 	int	fd;
 
-	fd = open(str[1], O_RDONLY);
+	fd = open(str, O_RDONLY);
 	if (fd > 0)
 	{
 		data->map = ft_parse_map(fd, data);
@@ -102,6 +103,7 @@ void	ft_start_map(char **str, t_data *data)
 	}
 	else
 	{
+		printf("%s\n", str);
 		ft_error("Error\nFailed to open file\n");
 		close(fd);
 		exit(1);
@@ -111,10 +113,10 @@ void	ft_start_map(char **str, t_data *data)
 /* Function to call other functions and tests if the file format
 	of the map is good (.ber) */
 
-void	map(char **str, t_data *data)
+void	map(char *str, t_data *data)
 {
 	data->map = NULL;
-	if (ft_strstr(str[1], ".ber") == FAIL)
+	if (ft_strstr(str, ".ber") == FAIL)
 	{
 		ft_error("Error\nNo correct format\n");
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/01 14:56:48 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:48:39 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	render_bg(t_data *data)
 			if (data->map[j][i] == data->content.wall)
 			{
 				display_img(data, data->image.img_wall, i, j);
-				put_text(data);
+				// put_text(data);
 			}
 			if (data->map[j][i] == data->content.empty)
 				display_img(data, data->image.img_floor, i, j);
@@ -107,6 +107,7 @@ void	window_utils(t_data *data)
 		ft_stop(data, FAIL);
 		return ;
 	}
+	usleep(100000);
 	data->counter = 0;
 	data->anim = 0;
 	mlx_loop_hook(data->mlx, &render_main, data);

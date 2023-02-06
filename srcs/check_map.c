@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:58:15 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/01 14:23:23 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:07:44 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ void	ft_check_content(t_data *data)
 
 	i = 0;
 	j = 0;
+	data->content.count_collectible = 0;
+	data->content.count_player = 0;
+	data->content.count_exit = 0;
 	while (data->map[i])
 	{
 		while (data->map[i][j])
