@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:12:21 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/06 17:19:15 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:26:02 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,14 @@ typedef struct content_s
 	char	wall;
 	char	player;
 	char	collectible;
+	// char	colectible;
 	char	empty;
 	char	exit;
 	int		count_player;
 	int		count_exit;
 	int		count_collectible;
+	// int		count_colectible;
+	// int		diff_colectible;
 }	t_content;
 
 typedef struct image_s

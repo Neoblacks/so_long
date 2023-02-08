@@ -6,11 +6,13 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:39:32 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/06 18:48:39 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:00:38 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+#include <sys/time.h>
+
 
 /*
 This function is used to render the background of the map.
@@ -28,12 +30,12 @@ void	render_bg(t_data *data)
 		i = 0;
 		while (data->map[j][i] != '\0')
 		{
-			if (data->map[j][i] == data->content.wall)
+			if ((data->map[j][i] >= '1' && data->map[j][i] <= 'B') || (data->map[j][i] >= 'X' && data->map[j][i] < 'a'))
 			{
 				display_img(data, data->image.img_wall, i, j);
 				// put_text(data);
 			}
-			if (data->map[j][i] == data->content.empty)
+			if ((data->map[j][i] >= '!' && data->map[j][i] <= '0') || data->map[j][i] == 'L')
 				display_img(data, data->image.img_floor, i, j);
 			i++;
 		}
@@ -82,6 +84,25 @@ void	render_other(t_data *data)
 This function calls the two functions above and is called by mlx_loop_hook
  */
 
+// int	render_main(t_data *data, int force)
+// {
+// 	static double sus;
+// 	struct timeval	tv;
+// 	double passus;
+
+// 	passus = gettimeofday(&tv, NULL);
+// 	passus = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
+
+// 	if (((passus - sus)/1000) > (1./240.) || force)
+// 	{
+// 		// printf("%f \n", (passus - sus) / 1000);
+// 		sus = passus;
+// 		render_bg(data);
+// 		render_other(data);
+// 	}
+// 	return (0);
+// }
+
 int	render_main(t_data *data)
 {
 	render_bg(data);
@@ -107,7 +128,6 @@ void	window_utils(t_data *data)
 		ft_stop(data, FAIL);
 		return ;
 	}
-	usleep(100000);
 	data->counter = 0;
 	data->anim = 0;
 	mlx_loop_hook(data->mlx, &render_main, data);

@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 12:23:49 by amugnier          #+#    #+#             */
-/*   Updated: 2023/02/01 14:52:23 by amugnier         ###   ########.fr       */
+/*   Updated: 2023/02/07 17:17:07 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	is_valid(int x, int y, t_data *data)
 {
 	if (x < 0 || x >= data->height || y < 0 || y >= data->width)
 		return (false);
-	if (data->map[x][y] == '1' || data->map[x][y] == 'E')
+	if ((data->map[x][y] >= '1' && data->map[x][y] <= 'B') || data->map[x][y] == 'E')
 	{
 		return (false);
 	}
@@ -57,8 +57,7 @@ int	browse_grid(t_data *data, int deplacements[4][2])
 	{
 		data->position = data->queue.array[data->queue.debut];
 		data->queue.debut++;
-		if (data->map[data->position.x][data->position.y] == 'C' \
-			|| data->map[data->position.x][data->position.y] == '0' \
+		if (data->map[data->position.x][data->position.y] == 'C' || (data->map[data->position.x][data->position.y] >= '!' && data->map[data->position.x][data->position.y] <= '0') \
 			|| data->map[data->position.x][data->position.y] == 'P')
 		{
 			if (data->map[data->position.x][data->position.y] == 'C')
